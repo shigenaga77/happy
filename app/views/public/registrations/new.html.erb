@@ -1,0 +1,51 @@
+<h2>Sign up</h2>
+
+<%= form_with model: @member, url: member_registration_path do |f| %>
+  <%= render "public/shared/error_messages", resource: resource %>
+  
+  <div class="field">
+    <%= f.label :氏名 %><br />
+    <%= f.text_field :last_name %>
+    <%= f.text_field :first_name %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :フリガナ %><br />
+    <%= f.text_field :last_name_kana %>
+    <%= f.text_field :first_name_kana %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :ニックネーム %><br />
+    <%= f.text_field :nickname %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :自己紹介%><br />
+    <%= f.text_field :self_introduction %>
+  </div>
+
+  <div class="field">
+    <%= f.label :メールアドレス %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :パスワード %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :パスワード再入力 %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "登録する" %>
+  </div>
+<% end %>
+
+既に登録済みの方は<%= link_to 'こちら', member_session_path %>
