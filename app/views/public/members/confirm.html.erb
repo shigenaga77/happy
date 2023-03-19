@@ -1,0 +1,10 @@
+<h1>本当に退会しますか？</h1>
+<p>
+    下記ボタンを押しますと、退会手続きを実行いたします。<br>
+    退会しますと、全ての情報が消えますがよろしいでしょうか？
+</p>
+
+<div class="d-flex justify-content-center align-items-center mt-5 mb-5">
+  <%= link_to "退会しない", members_path, class: 'btn btn-outline-primary mr-3' %>
+  <%= link_to "退会する", withdraw_path, method: :patch, "data-confirm" => "本当に消しますか？", class: 'btn btn-sm btn-outline-danger' %>
+</div>

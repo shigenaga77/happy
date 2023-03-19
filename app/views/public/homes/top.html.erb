@@ -1,6 +1,9 @@
 ようこそ!登録なしでサイトの観覧をすることができますが、登録すると各種機能が使え、より便利にサイトの利用ができます。
 まずはこちらからゲストログインでサイトをのぞいてみましょう!
 
+<%= link_to 'ゲストログイン（閲覧用）', members_guest_sign_in_path, method: :post %>
 <%= link_to '新規登録', new_member_registration_path %>
 <%= link_to 'About', about_path %>
 <%= link_to 'ログイン', new_member_session_path %>
+
+<%= image_tag 'takebe.jpg' %>

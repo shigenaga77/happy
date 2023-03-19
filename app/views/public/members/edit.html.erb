@@ -1,0 +1,47 @@
+<div>
+    <%= form_with model: @member, url: members_path, method: :patch do |f| %>
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>画像</td>
+                <td><%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %></td>
+            </tr>
+            <tr>
+                <td>氏名</td>
+                <td><%= f.text_field :last_name %></td>
+                <td><%= f.text_field :first_name %></td>
+            </tr>
+            <tr>
+                <td>フリガナ</td>
+                <td><%= f.text_field :last_name_kana %></td>
+                <td><%= f.text_field :first_name_kana %></td>
+            </tr>
+            <tr>
+                <td>ニックネーム</td>
+                <td><%= f.text_field :nickname %></td>
+            </tr>
+            <tr>
+                <td>自己紹介</td>
+                <td><%= f.text_field :self_introduction %></td>
+            </tr>
+            <tr>
+                <td>メールアドレス</td>
+                <td><%= f.email_field :email, autofocus: true, autocomplete: "email" %></td>
+            </tr>
+            <tr>
+                <td><%= f.submit "保存", class: 'btn btn-success' %></td>
+                <td>
+                  <button type="button" class="btn btn-outline-danger">
+                    <%= link_to "退会する", confirm_path %>
+                  </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <% end %>
+</div> 
