@@ -1,2 +1,44 @@
-<h1>Public::Posts#index</h1>
-<p>Find me in app/views/public/posts/index.html.erb</p>
+<div>
+    <h1>New post</h1>
+        <%= form_with model: @post do |f| %>
+            <div>
+                <%= f.label :画像 %>
+                <%= f.file_field :image, accept: "image/*" %>
+            </div>
+            <div>
+                <%= f.label :タイトル %>
+                <%= f.text_field :title %>
+            </div>
+            <div>
+                <%= f.label :本文 %>
+                <%= f.text_area :body %>
+            </div>
+            <div>
+                <%= f.label :ジャンル %>
+                <%= f.text_area :genre_id %>
+            </div>
+            <div>
+                <%= f.label :投稿ステータス %>
+                <%= f.select :post_status, [['公開',1], ['非公開',2]] %>
+            </div>
+            <div>
+                <%= f.submit '投稿' %>
+            </div>
+        <% end %>
+        
+    <h1>Genre</h1>
+</div>
+
+<div>
+    <h1>Post</h1>
+        <% @posts.each do |pos| %>
+            <div>
+                <%= pos.created_at.strftime("%Y/%m/%d") %>
+                <!--<= pos.member.nickname %>-->
+                <%= image_tag pos.image %>
+                <%= pos.genre_id %>
+                <%= pos.title %>
+                <%= pos.body %>
+            </div>
+        <% end %>
+</div>
