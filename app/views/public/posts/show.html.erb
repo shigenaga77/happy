@@ -14,6 +14,7 @@
             <%= image_tag @post.image, size: "100x100" %>
             <%= @post.genre_id %>
             <%= @post.body %>
+            <%= link_to "編集する", edit_post_path, class: 'btn btn-outline-primary mr-3' %>
     </div>
 </div>
 <div>
