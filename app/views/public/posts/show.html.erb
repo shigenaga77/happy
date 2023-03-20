@@ -1,2 +1,21 @@
-<h1>Public::Posts#show</h1>
-<p>Find me in app/views/public/posts/show.html.erb</p>
+<div>
+    <div>
+        <%= image_tag @member.get_profile_image(100,100) %>
+        <%= @member.nickname %>
+        <%= @member.self_introduction %>
+    </div>
+</div>
+<div>
+    <div>
+        <h1>Title</h1>
+            <%= @post.created_at.strftime("%Y/%m/%d") %>
+            <%= @member.nickname %>
+            <%= @post.title %>
+            <%= image_tag @post.image, size: "100x100" %>
+            <%= @post.genre_id %>
+            <%= @post.body %>
+    </div>
+</div>
+<div>
+    <h1>コメント</h1>
+</div>

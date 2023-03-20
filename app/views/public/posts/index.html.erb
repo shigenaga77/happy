@@ -31,14 +31,15 @@
 
 <div>
     <h1>Post</h1>
-        <% @posts.each do |pos| %>
+        <% @posts.each do |post| %>
             <div>
-                <%= pos.created_at.strftime("%Y/%m/%d") %>
-                <!--<= pos.member.nickname %>-->
-                <%= image_tag pos.image %>
-                <%= pos.genre_id %>
-                <%= pos.title %>
-                <%= pos.body %>
+                <%= post.created_at.strftime("%Y/%m/%d") %>
+                <%= link_to post_path(post.id) do %>
+                <%= image_tag post.image, size: "100x100" %>
+                <% end %>
+                <%= post.genre_id %>
+                <%= post.title %>
+                <%= post.body %>
             </div>
         <% end %>
 </div>
