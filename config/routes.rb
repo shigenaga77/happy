@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  scope module: :public do
+  # 会員側
+  scope module: :public do 
     root to: "homes#top"
     get '/about' => 'homes#about', as: 'about'
     # urlに:idを入れないためにresourcesではなくresource
@@ -23,6 +24,10 @@ Rails.application.routes.draw do
   # ゲストログイン
   devise_scope :member do
     post 'members/guest_sign_in', to: 'public/sessions#guest_sign_in'
+  end
+  
+  namespace :admin do
+    resources :members, only: [:index, :show, :edit, :update]
   end
   
   # 管理者用

@@ -15,6 +15,9 @@
             <%= @post.genre_id %>
             <%= @post.body %>
             <%= link_to "編集する", edit_post_path, class: 'btn btn-outline-primary mr-3' %>
+            <% if @post.member == current_member %>
+                <%= link_to "削除する", post_path, method: :delete, "data-confirm" => "本当に消しますか？", class: 'btn btn-sm btn-danger destry_book_id' %>
+            <% end %>
     </div>
 </div>
 <div>

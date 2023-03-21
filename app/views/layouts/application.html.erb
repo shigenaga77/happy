@@ -31,12 +31,31 @@
       <button>
         <%= link_to 'ログアウト', destroy_member_session_path, method: :delete %>
       </button>
+    <% elsif admin_signed_in? %>
+      <button>
+        <%= link_to '投稿一覧', admin_members_path %>
+      </button>
+      <button>
+        <%= link_to '会員一覧', admin_members_path %>
+      </button>
+      <button>
+        <%= link_to '投稿履歴一覧', about_path %>
+      </button>
+      <button>
+        <%= link_to 'ジャンル', about_path %>
+      </button>
+      <button>
+        <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %>
+      </button>
     <% else %>
       <button>
         <%= link_to "新規登録", new_member_registration_path %>
       </button>
       <button>
         <%= link_to "ログイン", new_member_session_path %>
+      </button>
+      <button>
+        <%= link_to "adminログイン", new_admin_session_path %>
       </button>
       <button>
         <%= link_to 'About', about_path %>
