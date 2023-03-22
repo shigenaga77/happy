@@ -1,0 +1,33 @@
+<h1>投稿詳細</h1>
+<%= image_tag @post.image, size: "100x100" %>
+<table>
+    <thead>
+        <tr>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>ニックネーム</td>
+            <td><%= @member.nickname %></td>
+        </tr>
+        <tr>
+            <td>タイトル</td>
+            <td><%= @post.title %></td>
+        </tr>
+        <tr>
+            <td>本文</td>
+            <td><%= @post.body %></td>
+        </tr>
+        <tr>
+            <td>ジャンル</td>
+            <td><%= @post.genre_id %></td>
+        </tr>
+        <tr>
+            <td>投稿ステータス</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+    <%= link_to "編集する", edit_admin_post_path, class: 'btn btn-outline-primary mr-3' %>
+    <%= link_to "削除する", admin_post_path, method: :delete, "data-confirm" => "本当に消しますか？", class: 'btn btn-sm btn-danger destry_book_id' %>

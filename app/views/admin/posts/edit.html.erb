@@ -1,0 +1,36 @@
+<div>
+    <%= form_with model: @post, url: admin_post_path, method: :patch do |f| %>
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>画像</td>
+                <td><%= f.file_field :image, placeholder: "投稿画像", accept: "image/*" %></td>
+            </tr>
+            <tr>
+                <td>タイトル</td>
+                <td><%= f.text_field :title %></td>
+            </tr>
+            <tr>
+                <td>本文</td>
+                <td><%= f.text_field :body %></td>
+            </tr>
+            <tr>
+                <td>ジャンル</td>
+                <td><%= f.text_field :genre_id %></td>
+            </tr>
+            <tr>
+                <td>投稿ステータス</td>
+                <td><%= f.text_field :post_status %></td>
+            </tr>
+            <tr>
+                <td><%= f.submit "保存", class: 'btn btn-success' %></td>
+            </tr>
+        </tbody>
+    </table>
+    <% end %>
+</div> 

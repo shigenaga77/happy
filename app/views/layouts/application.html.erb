@@ -33,7 +33,7 @@
       </button>
     <% elsif admin_signed_in? %>
       <button>
-        <%= link_to '投稿一覧', admin_members_path %>
+        <%= link_to '投稿一覧', admin_posts_path %>
       </button>
       <button>
         <%= link_to '会員一覧', admin_members_path %>
@@ -42,7 +42,7 @@
         <%= link_to '投稿履歴一覧', about_path %>
       </button>
       <button>
-        <%= link_to 'ジャンル', about_path %>
+        <%= link_to 'ジャンル', admin_genres_path %>
       </button>
       <button>
         <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %>

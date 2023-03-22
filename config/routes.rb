@@ -28,6 +28,8 @@ Rails.application.routes.draw do
   
   namespace :admin do
     resources :members, only: [:index, :show, :edit, :update]
+    resources :posts, only: [:index, :show, :edit, :update, :destroy]
+    resources :genres, only: [:index, :edit, :update, :create]
   end
   
   # 管理者用

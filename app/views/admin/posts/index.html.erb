@@ -1,0 +1,12 @@
+<h1>Post</h1>
+<% @posts.each do |post| %>
+<div>
+    <%= post.created_at.strftime("%Y/%m/%d") %>
+    <%= link_to admin_post_path(post.id) do %>
+        <%= image_tag post.image, size: "100x100" %>
+    <% end %>
+    <%= post.genre_id %>
+    <%= post.title %>
+    <%= post.body %>
+</div>
+<% end %>
