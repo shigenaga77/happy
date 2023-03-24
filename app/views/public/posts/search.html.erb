@@ -1,0 +1,14 @@
+  <h2>検索結果 "<%= @keyword %>"</h2>
+  <ul>
+    <% @post.each do |post| %>
+        <div>
+            <%= post.created_at.strftime("%Y/%m/%d") %>
+            <%= link_to post_path(post.id) do %>
+            <%= image_tag post.image, size: "100x100" %>
+            <% end %>
+            <%= post.genre_id %>
+            <%= post.title %>
+            <%= post.body %>
+        </div>
+    <% end %>
+  </ul>

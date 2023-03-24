@@ -1,3 +1,8 @@
+  # クラス名などは省略してあります
+  <%= form_with url: search_posts_path, local: true, method: :get do |form| %>
+    <%= form.text_field :keyword %>
+    <%= form.submit "検索" %>
+  <% end %>
 <div>
     <h1>New post</h1>
         <%= form_with model: @post do |f| %>

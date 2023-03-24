@@ -32,6 +32,15 @@ class Public::PostsController < ApplicationController
     redirect_to posts_path
   end
   
+    def search
+      if params[:keyword].present?
+        @post = Post.where('title LIKE ?', "%#{params[:keyword]}%")
+        @keyword = params[:keyword]
+      else
+        @post = Post.all
+      end
+    end
+  
   private
   
   def post_params

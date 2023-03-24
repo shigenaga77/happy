@@ -5,7 +5,12 @@ Rails.application.routes.draw do
     get '/about' => 'homes#about', as: 'about'
     # urlに:idを入れないためにresourcesではなくresource
     resource :members, only: [:show, :edit, :update]
-    resources :posts, only: [:index, :show, :edit, :update, :create, :destroy]
+    resources :posts do
+      resources :posts, only: [:index, :show, :edit, :update, :create, :destroy]
+      collection do
+        get 'search'
+      end
+    end
     # 退会確認画面
     get '/members/confirm' => 'members#confirm', as: 'confirm'
     # 論理削除用のルーティング
