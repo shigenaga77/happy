@@ -45,6 +45,7 @@
                 <%= post.genre_id %>
                 <%= post.title %>
                 <%= post.body %>
+                <p><%= link_to "#{post.comments.count} コメント", post_path(post.id) %></p>
             </div>
         <% end %>
 </div>

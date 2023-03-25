@@ -7,9 +7,11 @@ Rails.application.routes.draw do
     resource :members, only: [:show, :edit, :update]
     resources :posts do
       resources :posts, only: [:index, :show, :edit, :update, :create, :destroy]
+      resources :comments, only: [:create, :destroy]
       collection do
         get 'search'
       end
+    resource :favorites, only: [:create, :destroy]
     end
     # 退会確認画面
     get '/members/confirm' => 'members#confirm', as: 'confirm'
