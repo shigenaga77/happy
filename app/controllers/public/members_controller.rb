@@ -1,4 +1,5 @@
 class Public::MembersController < ApplicationController
+  
   def show
     @member = current_member
   end
@@ -24,6 +25,13 @@ class Public::MembersController < ApplicationController
     reset_session
     flash[:notice] = "退会処理を実行いたしました"
     redirect_to root_path
+  end
+  
+  
+  def likes
+    @member = Member.find(params[:id])
+    favorits= Favorite.where(member_id: @member.id).pluck(:post_id)
+    @favorite_posts = Post.find(favorites)
   end
   
   private

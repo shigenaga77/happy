@@ -4,7 +4,13 @@ Rails.application.routes.draw do
     root to: "homes#top"
     get '/about' => 'homes#about', as: 'about'
     # urlに:idを入れないためにresourcesではなくresource
-    resource :members, only: [:show, :edit, :update]
+      resource :members, only: [:show, :edit, :update]
+    resources :members do
+      member do
+    # いいね一覧画面
+        get :likes
+      end
+    end
     resources :posts do
       resources :posts, only: [:index, :show, :edit, :update, :create, :destroy]
       resources :comments, only: [:create, :destroy]
@@ -17,8 +23,6 @@ Rails.application.routes.draw do
     get '/members/confirm' => 'members#confirm', as: 'confirm'
     # 論理削除用のルーティング
     patch '/members/withdraw' => 'members#withdraw', as: 'withdraw'
-    # いいね一覧画面
-    get '/members/likes' => 'members#likes', as: 'likes'
     # 下書き一覧画面
     get '/posts/drafts' => 'posts#drafts', as: 'drafts'
   end
