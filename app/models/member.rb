@@ -7,8 +7,13 @@ class Member < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :comments, dependent: :destroy
-  has_many :likes, dependent: :destroy
-  has_many :like_posts, through: :likes, source: :post
+  # フォローをした、されたの関係
+  has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  
+  # 一覧画面で使う
+  has_many :followings, through: :relationships, source: :followed
+  has_many :followers, through: :reverse_of_relationships, source: :follower
   has_one_attached :profile_image
          
   # ゲストログイン
@@ -31,6 +36,19 @@ class Member < ApplicationRecord
       profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
     end
     profile_image.variant(resize_to_limit: [width, height]).processed
+  end
+  
+  # フォローしたときの処理
+  def follow(member_id)
+    relationships.create(followed_id: member_id)
+  end
+  # フォローを外すときの処理
+  def unfollow(member_id)
+    relationships.find_by(followed_id: member_id).destroy
+  end
+  # フォローしているか判定
+  def following?(member)
+    followings.include?(member)
   end
   
 end

@@ -28,11 +28,11 @@ class Public::MembersController < ApplicationController
   end
   
   
-  def likes
-    @member = Member.find(params[:id])
-    favorits= Favorite.where(member_id: @member.id).pluck(:post_id)
-    @favorite_posts = Post.find(favorites)
-  end
+  # def likes
+  #   @member = Member.find(params[:id])
+  #   favorits= Favorite.where(member_id: @member.id).pluck(:post_id)
+  #   @favorite_posts = Post.find(favorites)
+  # end
   
   private
   def member_params

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'relationships/followings'
+  get 'relationships/followers'
   # 会員側
   scope module: :public do 
     root to: "homes#top"
@@ -6,6 +8,9 @@ Rails.application.routes.draw do
     # urlに:idを入れないためにresourcesではなくresource
       resource :members, only: [:show, :edit, :update]
     resources :members do
+      resource :relationships, only: [:create, :destroy]
+      get 'followings' => 'relationships#followings', as: 'followings'
+      get 'followers' => 'relationships#followers', as: 'followers'
       member do
     # いいね一覧画面
         get :likes
