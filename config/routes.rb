@@ -20,8 +20,8 @@ Rails.application.routes.draw do
         get :likes
       end
       resource :relationships, only: [:create, :destroy]
-        get 'followings' => 'relationships#followings', as: 'followings'
-        get 'followers' => 'relationships#followers', as: 'followers'
+      get 'follows' => 'relationships#follower', as: 'follows'
+      get 'followers' => 'relationships#followed', as: 'followers'
     end
     resources :posts do
       resources :posts, only: [:index, :show, :edit, :update, :create, :destroy]

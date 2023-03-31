@@ -1,2 +1,30 @@
-<h1>Relationships#followers</h1>
-<p>Find me in app/views/relationships/followers.html.erb</p>
+ <% if @members.count > 0 %>
+   <table class="table">
+   　<thead>
+     　<tr>
+       　<th>name</th>
+       </tr>
+     </thead>
+     <tbody>
+     　<% @members.each do |member| %>
+       　<tr>
+           <td><%= @member.name %></td>
+           <td>フォロー数：<%= @member.follower.count %></td>
+           <td>フォロワー数：<%= @member.followed.count %></td>
+           <td>
+           　<% if current_member != @member %>
+             　<% if current_member.following?(@member) %>
+               　<%= link_to 'フォロー外す', member_relationships_path(@member.id), method: :delete, class: "btn btn-default" %>
+               <% else %>
+               　<%= link_to 'フォローする', member_relationships_path(@member.id), method: :POST , class: "btn btn-primary"%>
+               <% end %>
+            <% end %>
+          </td>
+          <td><%= link_to "Show", @member %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>ユーザーはいません</p>
+<% end %>
