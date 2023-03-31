@@ -3,6 +3,7 @@
         <%= image_tag @member.get_profile_image(100,100) %>
         <%= @member.nickname %>
         <%= @member.self_introduction %>
+        <%= link_to 'マイページ', member_path(@member.id) %>
     </div>
 </div>
 <div>
@@ -54,8 +55,4 @@
     </div>
         <p><%= link_to "#{@post.comments.count} コメント", post_path(@post.id) %></p>
 </div>
-<% if current_member.following?(member) %>
-  <%= link_to "フォロー外す", member_relationships_path(member.id), method: :delete %>
-<% else %>
-  <%= link_to "フォローする", member_relationships_path(member.id), method: :post %>
-<% end %>
+

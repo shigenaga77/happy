@@ -1,20 +1,27 @@
 Rails.application.routes.draw do
-  get 'relationships/followings'
-  get 'relationships/followers'
+  # 顧客用
+  # URL /members/sign_in ...
+  devise_for :members,skip: [:passwords], controllers: {
+    registrations: "public/registrations",
+    sessions: 'public/sessions'
+  }
+  # ゲストログイン
+  devise_scope :member do
+    post 'members/guest_sign_in', to: 'public/sessions#guest_sign_in'
+  end
   # 会員側
   scope module: :public do 
     root to: "homes#top"
     get '/about' => 'homes#about', as: 'about'
     # urlに:idを入れないためにresourcesではなくresource
-      resource :members, only: [:show, :edit, :update]
-    resources :members do
-      resource :relationships, only: [:create, :destroy]
-      get 'followings' => 'relationships#followings', as: 'followings'
-      get 'followers' => 'relationships#followers', as: 'followers'
-      member do
+    resources :members, only: [:show, :edit, :update]do
     # いいね一覧画面
+      member do
         get :likes
       end
+      resource :relationships, only: [:create, :destroy]
+        get 'followings' => 'relationships#followings', as: 'followings'
+        get 'followers' => 'relationships#followers', as: 'followers'
     end
     resources :posts do
       resources :posts, only: [:index, :show, :edit, :update, :create, :destroy]
@@ -30,16 +37,6 @@ Rails.application.routes.draw do
     patch '/members/withdraw' => 'members#withdraw', as: 'withdraw'
     # 下書き一覧画面
     get '/posts/drafts' => 'posts#drafts', as: 'drafts'
-  end
-  # 顧客用
-  # URL /members/sign_in ...
-  devise_for :members,skip: [:passwords], controllers: {
-    registrations: "public/registrations",
-    sessions: 'public/sessions'
-  }
-  # ゲストログイン
-  devise_scope :member do
-    post 'members/guest_sign_in', to: 'public/sessions#guest_sign_in'
   end
   
   namespace :admin do

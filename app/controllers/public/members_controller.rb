@@ -1,7 +1,8 @@
 class Public::MembersController < ApplicationController
   
   def show
-    @member = current_member
+    # @member = current_member
+    @member = Member.find(params[:id])
   end
 
   def edit
@@ -11,10 +12,11 @@ class Public::MembersController < ApplicationController
   def update
     @member = current_member
     @member.update(member_params)
-    redirect_to members_path
+    redirect_to member_path
   end
   
   def comfirm
+    # @member = Member.find(params[:id])
     @member = current_member
   end
     
@@ -28,14 +30,15 @@ class Public::MembersController < ApplicationController
   end
   
   
-  # def likes
-  #   @member = Member.find(params[:id])
-  #   favorits= Favorite.where(member_id: @member.id).pluck(:post_id)
-  #   @favorite_posts = Post.find(favorites)
-  # end
+  def likes
+    @member = Member.find(params[:id])
+    favorites= Favorite.where(member_id: @member.id).pluck(:post_id)
+    @favorite_posts = Post.find(favorites)
+  end
   
   private
   def member_params
     params.require(:member).permit(:profile_image, :email, :last_name, :first_name, :last_name_kana, :first_name_kana, :nickname, :self_introduction)
   end
+  
 end
