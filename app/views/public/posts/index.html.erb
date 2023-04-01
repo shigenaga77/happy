@@ -26,8 +26,12 @@
                 <%= f.label :投稿ステータス %>
                 <%= f.select :post_status, [['公開',1], ['非公開',2]] %>
             </div>
+            <!--<div>-->
+                <!--<= f.submit '投稿' %>-->
+            <!--</div>-->
             <div>
-                <%= f.submit '投稿' %>
+              <%= f.submit "レシピを公開", :name => 'post' %>
+              <%= f.submit "下書きに保存", :name => 'draft' %>
             </div>
         <% end %>
         
