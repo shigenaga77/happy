@@ -8,7 +8,7 @@ class CreatePosts < ActiveRecord::Migration[6.1]
       t.integer :comment_id
       t.string :title, null: false
       t.string :body, null: false
-      t.string :post_status, null: false
+      t.integer :post_status, default: 0, null: false
       t.timestamps
     end
   end

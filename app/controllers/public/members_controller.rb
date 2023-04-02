@@ -4,7 +4,7 @@ class Public::MembersController < ApplicationController
     # @member = current_member
     @member = Member.find(params[:id])
   end
-
+  
   def edit
     @member = current_member
   end

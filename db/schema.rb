@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(version: 2023_03_29_013709) do
     t.integer "comment_id"
     t.string "title", null: false
     t.string "body", null: false
-    t.string "post_status", null: false
+    t.integer "post_status", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

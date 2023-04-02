@@ -16,7 +16,7 @@ class Public::PostsController < ApplicationController
       end
       # 下書きボタンを押下した場合
     else
-      if @post.update(post_params)
+      if @post.update
         redirect_to member_path(current_member), notice: "レシピを下書き保存しました！"
       else
         render :index, alert: "登録できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
