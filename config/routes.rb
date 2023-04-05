@@ -20,14 +20,16 @@ Rails.application.routes.draw do
         get :likes
       end
       resource :relationships, only: [:create, :destroy]
-      get 'follows' => 'relationships#follower', as: 'follows'
-      get 'followers' => 'relationships#followed', as: 'followers'
+      get 'followings' => 'relationships#followings', as: 'followings'
+      get 'followers' => 'relationships#followers', as: 'followers'
     end
     resources :posts do
       resources :posts, only: [:index, :show, :edit, :update, :create, :destroy]
       resources :comments, only: [:create, :destroy]
       collection do
         get 'search'
+    # 下書き一覧画面
+        get 'drafts'
       end
     resource :favorites, only: [:create, :destroy]
     end
@@ -35,8 +37,6 @@ Rails.application.routes.draw do
     get '/members/confirm' => 'members#confirm', as: 'confirm'
     # 論理削除用のルーティング
     patch '/members/withdraw' => 'members#withdraw', as: 'withdraw'
-    # 下書き一覧画面
-    get '/posts/drafts' => 'posts#drafts', as: 'drafts'
   end
   
   namespace :admin do

@@ -7,13 +7,14 @@ class Member < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :comments, dependent: :destroy
-  # フォローをした、されたの関係
-  has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
-  has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  # 自分がフォローをしたり、外したりする記述
+  has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  #sourceは本当はfollow_idとなっていてカラム名を示している。#フォロー一覧を表示するための記述
+  has_many :followings, through: :relationships, source: :followed
   
-  # 一覧画面で使う
-  has_many :follower_member, through: :followed, source: :follower
-  has_many :following_member, through: :follower, source: :followed
+  has_many :reverse_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy 
+  #フォロワー一覧を表示するための記述
+  has_many :followers, through: :reverse_relationships, source: :follower
   has_one_attached :profile_image
          
   # ゲストログイン
@@ -38,17 +39,12 @@ class Member < ApplicationRecord
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
   
-  # フォローしたときの処理
   def follow(member_id)
-    follower.create(followed_id: member_id)
+    favorites.create(follow_id: member_id)
   end
-  # フォローを外すときの処理
+
   def unfollow(member_id)
-    follower.find_by(followed_id: member_id).destroy
-  end
-  # フォローしているか判定
-  def following?(member)
-    following_member.include?(member)
+    favorites.find_by(follow_id: member_id).destroy
   end
   
 end

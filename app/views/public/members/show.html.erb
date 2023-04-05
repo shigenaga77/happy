@@ -17,11 +17,3 @@
 <div>
     <h1>Pick up</h1>
 </div>
-
- <% if current_member != member %>
- 　<% if current_member.following?(member) %>
-   　<%= link_to 'フォロー外す', member_relationships_path(member.id), method: :delete, class: "btn btn-default" %>
-   <% else %>
-   　<%= link_to 'フォローする', member_relationships_path(member.id), method: :POST , class: "btn btn-primary"%>
-   <% end %>
- <% end %>

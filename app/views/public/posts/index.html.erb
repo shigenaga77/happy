@@ -22,17 +22,10 @@
                 <%= f.label :ジャンル %>
                 <%= f.text_area :genre_id %>
             </div>
-            <div>
-                <%= f.label :投稿ステータス %>
-                <%= f.select :post_status, [['公開',1], ['非公開',2]] %>
+            <div class="form-group">
+                <%= f.select :post_status, Post.post_statuses.keys.map { |k| [t("enums.post.post_status.#{k}"),k]}, {} %>
             </div>
-            <!--<div>-->
-                <!--<= f.submit '投稿' %>-->
-            <!--</div>-->
-            <div>
-              <%= f.submit "レシピを公開", :name => 'post' %>
-              <%= f.submit "下書きに保存", :name => 'draft' %>
-            </div>
+                <%= f.submit '投稿する' %>
         <% end %>
         
     <h1>Genre</h1>
@@ -53,3 +46,5 @@
             </div>
         <% end %>
 </div>
+
+<%= link_to "下書き", drafts_posts_path %>

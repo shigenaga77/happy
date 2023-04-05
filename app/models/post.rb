@@ -8,11 +8,6 @@ class Post < ApplicationRecord
     favorites.exists?(member_id: member.id)
   end
   
-  with_options presence: true, on: :publicize do
-    validates :genre_id
-    validates :title
-    validates :body
-  end
-    validates :title, length: { maximum: 14 }, on: :publicize
-    validates :body, length: { maximum: 80 }, on: :publicize
+  enum post_status: { published: 0, draft: 1 }
+  
 end

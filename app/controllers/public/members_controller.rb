@@ -36,6 +36,10 @@ class Public::MembersController < ApplicationController
     @favorite_posts = Post.find(favorites)
   end
   
+  def friends
+    @friends = Member.all
+  end
+  
   private
   def member_params
     params.require(:member).permit(:profile_image, :email, :last_name, :first_name, :last_name_kana, :first_name_kana, :nickname, :self_introduction)

@@ -1,27 +1,14 @@
 class Public::PostsController < ApplicationController
   def index
     @post = Post.new
-    @posts = Post.all
+    @posts = Post.published.all
   end
   
   def create
     @post = Post.new(post_params)
     @post.member_id = current_member.id
-    # 投稿ボタンを押下した場合
-    if params[:post]
-      if @post.save(context: :publicize)
-        redirect_to about_path
-      else
-        render :index, alert: "登録できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
-      end
-      # 下書きボタンを押下した場合
-    else
-      if @post.update
-        redirect_to member_path(current_member), notice: "レシピを下書き保存しました！"
-      else
-        render :index, alert: "登録できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
-      end
-    end
+    @post.save
+    redirect_to about_path
   end
 
   def show
@@ -46,14 +33,18 @@ class Public::PostsController < ApplicationController
     redirect_to posts_path
   end
   
-    def search
-      if params[:keyword].present?
-        @post = Post.where('title LIKE ?', "%#{params[:keyword]}%")
-        @keyword = params[:keyword]
-      else
-        @post = Post.all
-      end
+  def search
+    if params[:keyword].present?
+      @post = Post.where('title LIKE ?', "%#{params[:keyword]}%")
+      @keyword = params[:keyword]
+    else
+      @post = Post.all
     end
+  end
+  
+  def drafts
+    @posts = current_member.posts.draft.all
+  end
   
   private
   
