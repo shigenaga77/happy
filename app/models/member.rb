@@ -7,6 +7,7 @@ class Member < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :comments, dependent: :destroy
+  
   # 自分がフォローをしたり、外したりする記述
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   #sourceは本当はfollow_idとなっていてカラム名を示している。#フォロー一覧を表示するための記述
@@ -15,6 +16,11 @@ class Member < ApplicationRecord
   has_many :reverse_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy 
   #フォロワー一覧を表示するための記述
   has_many :followers, through: :reverse_relationships, source: :follower
+  
+  # 自分からの通知
+  has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
+  # 相手からの通知
+  has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
   has_one_attached :profile_image
          
   # ゲストログイン
