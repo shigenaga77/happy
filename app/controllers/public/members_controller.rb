@@ -1,7 +1,7 @@
 class Public::MembersController < ApplicationController
   
   def show
-    # @member = current_member
+    #@member = current_member
     @member = Member.find(params[:id])
   end
   
@@ -36,9 +36,6 @@ class Public::MembersController < ApplicationController
     @favorite_posts = Post.find(favorites)
   end
   
-  def friends
-    @friends = Member.all
-  end
   
   private
   def member_params

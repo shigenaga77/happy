@@ -40,11 +40,14 @@ class Member < ApplicationRecord
   end
   
   def follow(member_id)
-    favorites.create(follow_id: member_id)
+    relationships.create(followed_id: member_id)
   end
 
   def unfollow(member_id)
-    favorites.find_by(follow_id: member_id).destroy
+    relationships.find_by(followed_id: member_id).destroy
   end
   
+  def following?(member)
+    followings.include?(member)
+  end
 end
