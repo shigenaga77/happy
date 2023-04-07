@@ -1,0 +1,22 @@
+<% visitor = notification.visitor %>
+<% visited = notification.visited %>
+
+<div class='m-2'>
+  <%= link_to member_path(visitor) do %>
+    <%= visitor.nickname %>
+  <% end %>
+  <span>さんが</span>
+
+  <% case notification.action %>
+    <% when 'follow' then %>
+      <%= "あなたをフォローしました" %>
+    <% when 'like' then %>
+        <%= link_to 'あなたの投稿', notification.post, style: "font-weight: bold;" %>
+        <%= "にいいねしました" %>
+    <% when 'comment' then %>
+        <%= link_to "あなたの投稿", notification.post, style: "font-weight: bold;" %>
+        <%= "にコメントしました" %>
+          <%= Comment.find_by(id: notification.comment_id)&.comment %>
+  <% end %>
+  <span><%= " (#{time_ago_in_words(notification.created_at)}前)" %></span><br>
+</div>

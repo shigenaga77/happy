@@ -6,7 +6,7 @@ class Public::RelationshipsController < ApplicationController
     @member = Member.find(params[:member_id])
     current_member.follow(params[:member_id])
     #フォローの通知機能
-    # @user.create_notification_follow!(current_user)
+    @member.create_notification_follow!(current_member)
     redirect_to request.referer
   end
 
