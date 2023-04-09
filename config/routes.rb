@@ -13,7 +13,8 @@ Rails.application.routes.draw do
   scope module: :public do 
     root to: "homes#top"
     get '/about' => 'homes#about', as: 'about'
-    # urlに:idを入れないためにresourcesではなくresource
+    get '/members/confirm' => 'members#confirm', as: 'confirm'
+    patch '/members/withdraw' => 'members#withdraw', as: 'withdraw'
     resources :members, only: [:show, :edit, :update]do
     # いいね一覧画面
       member do
@@ -34,17 +35,14 @@ Rails.application.routes.draw do
     resource :favorites, only: [:create, :destroy]
     end
     # 退会確認画面
-    get '/members/confirm' => 'members#confirm', as: 'confirm'
     # 論理削除用のルーティング
-    patch '/members/withdraw' => 'members#withdraw', as: 'withdraw'
     # 通知機能
     resources :notifications, only: :index
   end
   
   namespace :admin do
     resources :members, only: [:index, :show, :edit, :update]
-    resources :posts do
-      resources :posts, only: [:index, :show, :edit, :update, :destroy]
+    resources :posts, only: [:index, :show, :edit, :update, :destroy]do
       resources :comments, only: :destroy
     end
     resources :genres, only: [:index, :edit, :update, :create]

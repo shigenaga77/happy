@@ -3,7 +3,7 @@
     <%= image_tag @member.get_profile_image(100,100) %>
     <h3>自己紹介</h3>
     <%= @member.self_introduction %>
-    <%= link_to "編集する", edit_member_path, class: 'btn btn-outline-primary mr-3' %>
+    <%= link_to "編集する", edit_member_path(current_member), class: 'btn btn-outline-primary mr-3' %>
     <!--<= link_to 'フォロー', %>-->
     <!--<= link_to 'フォロワー' %>-->
     <h3>いいね一覧</h3>

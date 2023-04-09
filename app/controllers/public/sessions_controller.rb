@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Public::SessionsController < Devise::SessionsController
+  before_action :member_state, only: [:create]
+  
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
@@ -24,6 +26,22 @@ class Public::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
+  
+  # 退会しているかを判断するメソッド
+  def member_state
+    ## 【処理内容1】 入力されたemailからアカウントを1件取得
+    @member = Member.find_by(email: params[:member][:password])
+    ## アカウントを取得できなかった場合、このメソッドを終了する
+    if @member
+    ## 【処理内容2】 取得したアカウントのパスワードと入力されたパスワードが一致してるかを判別
+      if @member.valid_password?(params[:member][:password]) && (@member.is_deleted == false)
+        flash[:notice] = "退会済みです。再度ご登録をしてご利用ください。"
+        redirect_to new_member_registration_path
+      else
+        flash[:notice] = "項目を入力してください"
+      end
+    end
+  end
   
   def guest_sign_in
     member = Member.guest

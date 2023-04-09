@@ -22,6 +22,10 @@ class Member < ApplicationRecord
   # 相手からの通知
   has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
   has_one_attached :profile_image
+  
+  def active_for_authentication?
+    super && (is_deleted == false)
+  end
          
   # ゲストログイン
   def self.guest
