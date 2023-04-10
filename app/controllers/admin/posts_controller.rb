@@ -1,7 +1,6 @@
 class Admin::PostsController < ApplicationController
     def index
         @posts = Post.all
-        # @member = @post.member
     end
     
     def show
