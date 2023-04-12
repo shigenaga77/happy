@@ -14,18 +14,25 @@
   <body>
     <header class="d-flex justify-content-center p-3">
       <h1><%= link_to 'HAPPY', root_path %></h1>
+      <% if member_signed_in? %>
+        <%= link_to "通知一覧", notifications_path %>
+      <% end %>
     </header>
     <nav>
+        <div class="d-flex justify-content-center">ようこそ、<%= current_member.nickname %>さん!</div>
       <ul class="nav d-flex justify-content-around p-3">
       <% if member_signed_in? %>
-        <li class="nav-item">
-          ようこそ、<%= current_member.nickname %>さん！
-        </li>
         <li>
           <%= link_to 'マイページ', member_path(current_member) %>
         </li>
         <li>
           <%= link_to 'About', about_path %>
+        </li>
+        <li>
+          <%= form_with url: search_posts_path, local: true, method: :get do |form| %>
+            <%= form.text_field :keyword %>
+            <%= form.submit "検索" %>
+          <% end %>
         </li>
         <li>
           <%= link_to '投稿一覧', posts_path %>

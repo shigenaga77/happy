@@ -1,10 +1,16 @@
-<h1>本当に退会しますか？</h1>
-<p>
+<div class="container">
+  <div class="row d-flex justify-content-center p-5">
+    <h3>本当に退会しますか？</h3>
+  </div>
+  <div class="row d-flex justify-content-center p-5">
+    <p>
     下記ボタンを押しますと、退会手続きを実行いたします。<br>
     退会しますと、全ての情報が消えますがよろしいでしょうか？
-</p>
-
-<div class="d-flex justify-content-center align-items-center mt-5 mb-5">
-  <%= link_to "退会しない", root_path, class: 'btn btn-outline-primary mr-3' %>
-  <%= link_to "退会する", withdraw_path, method: :patch, "data-confirm" => "本当に消しますか？", class: 'btn btn-sm btn-outline-danger' %>
+    </p>
+  </div>
+    
+    <div class="row d-flex justify-content-center p-5">
+    <%= link_to "退会しない", member_path(current_member), class: 'btn btn-outline-primary mr-3' %>
+    <%= link_to "退会する", withdraw_path, method: :patch, "data-confirm" => "本当に消しますか？", class: 'btn btn-sm btn-outline-danger' %>
+    </div>
 </div>

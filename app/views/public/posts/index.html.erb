@@ -1,50 +1,71 @@
-  # クラス名などは省略してあります
-  <%= form_with url: search_posts_path, local: true, method: :get do |form| %>
-    <%= form.text_field :keyword %>
-    <%= form.submit "検索" %>
-  <% end %>
-<div>
-    <h1>New post</h1>
-        <%= form_with model: @post do |f| %>
-            <div>
-                <%= f.label :画像 %>
-                <%= f.file_field :image, accept: "image/*" %>
-            </div>
-            <div>
-                <%= f.label :タイトル %>
-                <%= f.text_field :title %>
-            </div>
-            <div>
-                <%= f.label :本文 %>
-                <%= f.text_area :body %>
-            </div>
-            <div>
-                <%= f.label :ジャンル %>
-                <%= f.text_area :genre_id %>
-            </div>
-            <div class="form-group">
-                <%= f.select :post_status, Post.post_statuses.keys.map { |k| [t("enums.post.post_status.#{k}"),k]}, {} %>
-            </div>
-                <%= f.submit '投稿する' %>
-        <% end %>
-        
-    <h1>Genre</h1>
-</div>
-
-<div>
-    <h1>Post</h1>
-        <% @posts.each do |post| %>
-            <div>
-                <%= post.created_at.strftime("%Y/%m/%d") %>
-                <%= link_to post_path(post.id) do %>
-                <%= image_tag post.image, size: "100x100" %>
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <h4>New post</h4>
+                <%= form_with model: @post do |f| %>
+                    <div>
+                        <%= f.label :画像 %>
+                        <%= f.file_field :image, accept: "image/*" %>
+                    </div>
+                    <div>
+                        <%= f.label :タイトル %>
+                        <%= f.text_field :title %>
+                    </div>
+                    <div>
+                        <%= f.label :本文 %>
+                        <%= f.text_area :body %>
+                    </div>
+                    <div>
+                        <%= f.label :ジャンル %>
+                        <%= f.text_area :genre_id %>
+                    </div>
+                    <div class="form-group">
+                        <%= f.select :post_status, Post.post_statuses.keys.map { |k| [t("enums.post.post_status.#{k}"),k]}, {} %>
+                    </div>
+                        <%= f.submit '投稿する' %>
                 <% end %>
-                <%= post.genre_id %>
-                <%= post.title %>
-                <%= post.body %>
-                <p><%= link_to "#{post.comments.count} コメント", post_path(post.id) %></p>
-            </div>
-        <% end %>
+            <h4>Genre</h4>
+        </div>
+        <div class="col-7">
+            <h3 class="d-flex justify-content-center">Post</h3>
+                <div class="d-flex flex-wrap">
+                    <% @posts.each do |post| %>
+                    <table class="mr-5">
+                        <thead>
+                            <tr>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><%= post.created_at.strftime("%Y/%m/%d") %></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <%= link_to post_path(post.id) do %>
+                                    <%= image_tag post.image, size: "100x100" %>
+                                    <% end %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><%= post.genre_id %></td>
+                            </tr>
+                            <tr>
+                                <td><%= post.title %></td>
+                            </tr>
+                            <tr>
+                                <td><%= post.body %></td>
+                            </tr>
+                            <tr>
+                                <td><%= link_to "#{post.comments.count} コメント", post_path(post.id) %></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <% end %>
+                </div>
+        </div>
+        <div class="col-2">
+            <%= link_to "下書き", drafts_posts_path %>
+        </div>
+    </div>
 </div>
-
-<%= link_to "下書き", drafts_posts_path %>

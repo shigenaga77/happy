@@ -2,6 +2,9 @@ class Public::MembersController < ApplicationController
   
   def show
     @member = Member.find(params[:id])
+    @posts = Post.all
+    @my_posts = current_member.posts.page(params[:page]).per(5)
+    
   end
   
   def edit

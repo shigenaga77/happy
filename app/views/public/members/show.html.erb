@@ -1,30 +1,67 @@
-<div>
-    <h3><%= @member.nickname %></h3>
-    <%= image_tag @member.get_profile_image(100,100) %>
-    <h3>自己紹介</h3>
-    <%= @member.self_introduction %>
-    <%= link_to "編集する", edit_member_path(current_member), class: 'btn btn-outline-primary mr-3' %>
-    <!--<= link_to 'フォロー', %>-->
-    <!--<= link_to 'フォロワー' %>-->
-    <h3>いいね一覧</h3>
-    <p><%=link_to"お気に入り記事",likes_member_path(@member) %></p>
+<div class="container">
+    <div class="row">
+        <div class="col-3 p-3">
+            <h4><%= @member.nickname %></h4>
+            <%= image_tag @member.get_profile_image(100,100) %>
+            <% if current_member != @member %>
+             　<% if current_member.following?(@member) %>
+               　<%= link_to 'フォロー外す', member_relationships_path(@member.id), method: :delete, class: "btn btn-danger btn-sm" %>
+               <% else %>
+               　<%= link_to 'フォローする', member_relationships_path(@member.id), method: :POST , class: "btn btn-primary btn-sm"%>
+               <% end %>
+            <% end %>
+            <h4 class="pt-3">自己紹介</h4>
+            <%= @member.self_introduction %>
+            <%= link_to "編集する", edit_member_path(current_member), class: 'btn btn-outline-primary mr-3' %>
+            <p class="pt-3">
+                <%= link_to "フォロー一覧", member_followers_path(@member) %><br>
+            </p>
+            <p>
+                <%= link_to "フォロワー一覧", member_followings_path(@member) %>
+            </p>
+            <h4 class="pt-3">いいね一覧</h4>
+            <p class="pt-3"><%=link_to"お気に入り記事",likes_member_path(@member) %></p>
+        </div>
+        
+        <div class="col-7 p-3">
+            <h4 class="d-flex justify-content-center">Post</h4>
+            <% @my_posts.each do |post| %>
+            <div class="d-flex justify-content-between mb-3">
+                <div class="pr-5 pt-3">
+                    <p><%= post.created_at.strftime("%Y/%m/%d") %></p>
+                    <%= link_to post_path(post.id) do %>
+                    <%= image_tag post.image, size: "100x100" %>
+                    <% end %>
+                    <p class="pt-3"><%= post.genre_id %></p>
+                </div>
+                <div>
+                    <table class="table table-borderless">
+                        <thead>
+                            <tr>
+                                <th><%= post.title %></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                            <td><%= post.body %></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div></div>
+            </div>
+            <div>
+                <%= link_to "#{post.comments.count} コメント", post_path(post.id) %>
+            </div>
+            <% end %>
+            <div class="row d-flex justify-content-center">
+                <%= paginate @my_posts %>
+            </div>
+        </div>
+        <div class="col-2 p-3">
+            <h4>Pick up</h4>
+            <h4>Ranking</h4>
+        </div>
+    </div>
 </div>
-
-<div>
-    <h1>Post</h1>
-</div>
-
-<div>
-    <h1>Pick up</h1>
-</div>
- <% if current_member != @member %>
- 　<% if current_member.following?(@member) %>
-   　<%= link_to 'フォロー外す', member_relationships_path(@member.id), method: :delete, class: "btn btn-default" %>
-   <% else %>
-   　<%= link_to 'フォローする', member_relationships_path(@member.id), method: :POST , class: "btn btn-primary"%>
-   <% end %>
- <% end %>
  
-<%= link_to "フォロー一覧", member_followers_path(@member) %>
-<%= link_to "フォロワー一覧", member_followings_path(@member) %>
-<%= link_to "通知一覧", notifications_path %>
