@@ -49,4 +49,8 @@ class Public::SessionsController < Devise::SessionsController
     redirect_to about_path, notice: 'ゲストユーザーとしてログインしました。'
   end
   
+  def after_sign_in_path_for(resource)
+    member_path(current_member)
+  end
+  
 end

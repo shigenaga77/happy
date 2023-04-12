@@ -1,44 +1,50 @@
-<div class="container">
+<div class="container p-3">
     <div class="row">
         <div class="col-2">
             <h3>会員詳細</h3>
         </div>
-        <div class="col-8">
+        <div class="col-6">
             <table class="table table-bordered">
                 <thead>
                     <tr></tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>会員ID</td>
+                        <td class="table-info">会員ID</td>
                         <td><%= @member.id %></td>
                     </tr>
                     <tr>
-                        <td>氏名</td>
+                        <td class="table-info">氏名</td>
                         <td><%= @member.last_name+@member.first_name %></td>
                     </tr>
                     <tr>
-                        <td>フリガナ</td>
+                        <td class="table-info">フリガナ</td>
                         <td><%= @member.last_name_kana+@member.first_name_kana %></td>
                     </tr>
                     <tr>
-                        <td>ニックネーム</td>
+                        <td class="table-info">ニックネーム</td>
                         <td><%= @member.nickname %></td>
                     </tr>
                     <tr>
-                        <td>メールアドレス</td>
+                        <td class="table-info">メールアドレス</td>
                         <td><%= @member.email %></td>
                     </tr>
                     <tr>
-                        <td>会員ステータス</td>
-                        <td><% @member.is_deleted %></td>
+                        <td class="table-info">会員ステータス</td>
+                        <td>
+                            <% if @member.is_deleted %>
+                                退会
+                            <% else %>
+                                <%= "有効" %>
+                            <% end %>
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
-    <div class="row">
-        <button type="button" class="btn btn-outline-primary">
+    <div class="row d-flex justify-content-center">
+        <button type="button" class="btn btn-outline-primary mr-5">
             <%= link_to "投稿一覧", admin_post_path(@member) %>
         </button>
         <button type="button" class="btn btn-outline-success">

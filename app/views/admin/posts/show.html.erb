@@ -1,44 +1,52 @@
-<h1>投稿詳細</h1>
-<%= image_tag @post.image, size: "100x100" %>
-<table>
-    <thead>
-        <tr>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>ニックネーム</td>
-            <td><%= @member.nickname %></td>
-        </tr>
-        <tr>
-            <td>タイトル</td>
-            <td><%= @post.title %></td>
-        </tr>
-        <tr>
-            <td>本文</td>
-            <td><%= @post.body %></td>
-        </tr>
-        <tr>
-            <td>ジャンル</td>
-            <td><%= @post.genre_id %></td>
-        </tr>
-        <tr>
-            <td>投稿ステータス</td>
-            <td></td>
-        </tr>
-    </tbody>
-</table>
-    <%= link_to "編集する", edit_admin_post_path, class: 'btn btn-outline-primary mr-3' %>
-    <%= link_to "削除する", admin_post_path, method: :delete, "data-confirm" => "本当に消しますか？", class: 'btn btn-sm btn-danger destry_book_id' %>
-    
-<h1>コメント</h1>
-<div>
-      <p>コメント件数：<%= @post.comments.count %></p>
-      <% @post.comments.each do |comment| %>
-        <p><%= image_tag comment.member.get_profile_image(100,100) %></p>
-        <%= comment.member.last_name %>
-        <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
-        <%= link_to "削除", admin_post_comment_path(comment.post, comment), method: :delete %>
-      <% end %>
+<div class="container p-3">
+    <div class="row">
+        <div class="col-4">
+            <h3 class="p-3">投稿詳細</h3>
+            <%= image_tag @post.image, size: "300x300" %>
+        </div>
+        <div class="col-6">
+            <table class="table table-borderless mt-4">
+                <thead>
+                    <tr>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ニックネーム</td>
+                        <td><%= @member.nickname %></td>
+                    </tr>
+                    <tr>
+                        <td>タイトル</td>
+                        <td><%= @post.title %></td>
+                    </tr>
+                    <tr>
+                        <td>本文</td>
+                        <td><%= @post.body %></td>
+                    </tr>
+                    <tr>
+                        <td>ジャンル</td>
+                        <td><%= @post.genre_id %></td>
+                    </tr>
+                    <tr>
+                        <td>投稿ステータス</td>
+                        <td><%= @post.post_status_i18n %></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <%= link_to "編集する", edit_admin_post_path, class: 'btn btn-outline-primary mr-5' %>
+        <%= link_to "削除する", admin_post_path, method: :delete, "data-confirm" => "本当に消しますか？", class: 'btn btn-sm btn-danger destry_book_id' %>
+    </div>
+    <div>
+          <p>コメント件数：<%= @post.comments.count %></p>
+          <% @post.comments.each do |comment| %>
+            <p><%= image_tag comment.member.get_profile_image(100,100) %></p>
+            <%= comment.member.last_name %>
+            <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
+            <%= link_to "削除", admin_post_comment_path(comment.post, comment), method: :delete %>
+          <% end %>
+    </div>
 </div>

@@ -1,10 +1,10 @@
 <div class="container">
-    <div class="row">
+    <div class="row p-3">
         <h3>投稿履歴</h3>
     </div>
-    <div class="row">
-        <table>
-            <thead>
+    <div class="row center-block">
+        <table class="table table-bordered">
+            <thead class="table-primary">
                 <th>投稿日時</th>
                 <th>投稿者</th>
                 <th>タイトル</th>
@@ -24,4 +24,8 @@
             <% end %>
         </table>
     </div>
-</div>/div>
+    
+    <div class="row d-flex justify-content-center">
+        <%= paginate @posts %>
+    </div>
+</div>

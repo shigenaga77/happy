@@ -1,66 +1,66 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Happy</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
+    <title>Happy</title>
   </head>
 
   <body>
-    <header>
-      <h1>HAPPY</h1>
+    <header class="d-flex justify-content-center p-3">
+      <h1><%= link_to 'HAPPY', root_path %></h1>
     </header>
     <nav>
+      <ul class="nav d-flex justify-content-around p-3">
       <% if member_signed_in? %>
-      <li>
-        ようこそ、<%= current_member.nickname %>さん！
-      </li>
-      <button>
-        <%= link_to 'マイページ', member_path(current_member) %>
-      </button>
-      <button>
-        <%= link_to 'About', about_path %>
-      </button>
-      <button>
-        <%= link_to '投稿一覧', posts_path %>
-      </button>
-      <button>
-        <%= link_to 'ログアウト', destroy_member_session_path, method: :delete %>
-      </button>
-    <% elsif admin_signed_in? %>
-      <button>
-        <%= link_to '投稿一覧', admin_posts_path %>
-      </button>
-      <button>
-        <%= link_to '会員一覧', admin_members_path %>
-      </button>
-      <button>
-        <%= link_to '投稿履歴一覧', about_path %>
-      </button>
-      <button>
-        <%= link_to 'ジャンル', admin_genres_path %>
-      </button>
-      <button>
-        <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %>
-      </button>
-    <% else %>
-      <button>
-        <%= link_to "新規登録", new_member_registration_path %>
-      </button>
-      <button>
-        <%= link_to "ログイン", new_member_session_path %>
-      </button>
-      <button>
-        <%= link_to "adminログイン", new_admin_session_path %>
-      </button>
-      <button>
-        <%= link_to 'About', about_path %>
-      </button>
-    <% end %>
+        <li class="nav-item">
+          ようこそ、<%= current_member.nickname %>さん！
+        </li>
+        <li>
+          <%= link_to 'マイページ', member_path(current_member) %>
+        </li>
+        <li>
+          <%= link_to 'About', about_path %>
+        </li>
+        <li>
+          <%= link_to '投稿一覧', posts_path %>
+        </li>
+        <li>
+          <%= link_to 'ログアウト', destroy_member_session_path, method: :delete %>
+        </li>
+      <% elsif admin_signed_in? %>
+        <li>
+          <%= link_to '投稿履歴一覧', admin_posts_path %>
+        </li>
+        <li>
+          <%= link_to '会員一覧', admin_members_path %>
+        </li>
+        <li>
+          <%= link_to 'ジャンル', admin_genres_path %>
+        </li>
+        <li>
+          <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %>
+        </li>
+      <% else %>
+        <li>
+          <%= link_to "新規登録", new_member_registration_path %>
+        </li>
+        <li>
+          <%= link_to "ログイン", new_member_session_path %>
+        </li>
+        <li>
+          <%= link_to "adminログイン", new_admin_session_path %>
+        </li>
+        <li>
+          <%= link_to 'About', about_path %>
+        </li>
+      <% end %>
+      </ul>
     </nav>
     <%= yield %>
   </body>
