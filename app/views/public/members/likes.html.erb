@@ -1,9 +1,31 @@
-いいね一覧
-<% @favorite_posts.each do |post|%><br>
-    <%= post.created_at.strftime("%Y/%m/%d") %>
-    <%= post.member.nickname %>
-    <%= post.title %>
-    <%= image_tag post.image, size: "100x100" %>
-    <%= post.genre_id %>
-    <%= post.body %>
-<% end %>
+<div class="container">
+    <div class="row">
+        <%= render 'leftber', members: @member %>
+        <div class="col-2">
+            <h4 class="d-flex justify-content-center">いいね一覧</h4>
+            <% @favorite_posts.each do |post|%><br>
+                <%= post.member.nickname %><br>
+                <%= post.created_at.strftime("%Y/%m/%d") %><br>
+                <%= image_tag post.image, size: "100x100" %><br>
+                <%= post.genre_id %>
+        </div>
+        <div class="col-5 pt-5">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th><%= post.title %></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><%= post.body %></td>
+                        </tr>
+                    </tbody>
+                </table>
+            <% end %>
+        </div>
+        <div class="col-2">
+            <h3>Pick up</h3>
+        </div>
+    </div>
+</div>

@@ -1,58 +1,84 @@
-<div>
-    <div>
-        <%= image_tag @member.get_profile_image(100,100) %>
-        <%= @member.nickname %>
-        <%= @member.self_introduction %>
-        <%= link_to 'マイページ', member_path(@member.id) %>
-    </div>
-</div>
-<div>
-    <div>
-        <h1>Title</h1>
-            <%= @post.created_at.strftime("%Y/%m/%d") %>
-            <%= @member.nickname %>
-            <%= @post.title %>
+<div class="container">
+    <div class="row">
+        <div class="col-2">
+            <%= image_tag @member.get_profile_image(100,100) %><br>
+            <%= link_to member_path(@member.id) do %>
+            <p><%= @member.nickname %></p>
+            <% end %>
+            <p><%= @member.self_introduction %></p>
+        </div>
+        <div class="col-3">
+            <h3 class="d-flex justify-content-start"><%= @post.title %></h3>
             <%= image_tag @post.image, size: "100x100" %>
-            <%= @post.genre_id %>
-            <%= @post.body %>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>投稿日時</td>
+                        <td><%= @post.created_at.strftime("%Y/%m/%d") %></td>
+                    </tr>
+                    <tr>
+                        <td>ニックネーム</td>
+                        <td><%= @member.nickname %></td>
+                    </tr>
+                    <tr>
+                        <td>ジャンル</td>
+                        <td><%= @post.genre_id %></td>
+                    </tr>
+                    <tr>
+                        <td>本文</td>
+                        <td><%= @post.body %></td>
+                    </tr>
+                </tbody>
+            </table>
             <%= link_to "編集する", edit_post_path, class: 'btn btn-outline-primary mr-3' %>
             <% if @post.member == current_member %>
-                <%= link_to "削除する", post_path, method: :delete, "data-confirm" => "本当に消しますか？", class: 'btn btn-sm btn-danger destry_book_id' %>
+                <%= link_to "削除する", post_path, method: :delete, "data-confirm" => "本当に消しますか？", class: 'btn btn-outline-danger destry_book_id' %>
             <% end %>
-            <% if @post.favorited_by?(current_member) %>
-                <p>
-                <%= link_to post_favorites_path(@post), method: :delete do %>
-                ♥<%= @post.favorites.count %> いいね
+        </div>
+                
+                
+        <div class="col-4">
+            <h3>コメント</h3>
+                <% @post.comments.each do |comment| %>
+                    <div>
+                        <h5><%= comment.member.nickname %></h5>
+                        <p><%= comment.comment %></p>
+                        <% if comment.member == current_member %>
+                            <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete %>
+                        <% end %>
+                    </div>
                 <% end %>
-                </p>
-            <% else %>
-                <p>
-                <%= link_to post_favorites_path(@post), method: :post do %>
-                ♡<%= @post.favorites.count %> いいね
+                <p><%= link_to "コメント件数：#{@post.comments.count}", post_path(@post.id) %></p>
+                
+                <%= form_with model: [@post, @comment] do |f| %>
+                    <%= f.label "コメントする" %><br>
+                    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %><br>
+                    <%= f.submit "送信する", class: "btn btn-primary" %>
                 <% end %>
-                </p>
-            <% end %>
-    </div>
-    <div>
-      <%= form_with model: [@post, @comment] do |f| %>
-        <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-        <%= f.submit "送信する" %>
-      <% end %>
+                
+                <div>
+                    <% if @post.favorited_by?(current_member) %>
+                        <p>
+                        <%= link_to post_favorites_path(@post), method: :delete do %>
+                        ♥<%= @post.favorites.count %> いいね
+                        <% end %>
+                        </p>
+                    <% else %>
+                        <p>
+                        <%= link_to post_favorites_path(@post), method: :post do %>
+                        ♡<%= @post.favorites.count %> いいね
+                        <% end %>
+                        </p>
+                    <% end %>
+                </div>
+        </div>
+        <div class="col-2">
+            <h3>Pick up</h3>
+        </div>
     </div>
 </div>
-<div>
-    <h1>コメント</h1>
-    <div>
-      <p>コメント件数：<%= @post.comments.count %></p>
-      <% @post.comments.each do |comment| %>
-        <p><%= image_tag comment.member.get_profile_image(100,100) %></p>
-        <%= comment.member.last_name %>
-        <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
-        <% if comment.member == current_member %>
-            <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete %>
-        <% end %>
-      <% end %>
-    </div>
-        <p><%= link_to "#{@post.comments.count} コメント", post_path(@post.id) %></p>
-</div>
-
