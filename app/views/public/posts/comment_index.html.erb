@@ -1,0 +1,13 @@
+<div class="container">
+    <div class="row">
+        <div>
+            <% @post.comments.each do |comment| %>
+                    <h5><%= comment.member.nickname %></h5>
+                    <p><%= comment.comment %></p>
+                    <% if comment.member == current_member %>
+                        <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete %>
+                    <% end %>
+            <% end %>
+        </div>
+    </div>
+</div>

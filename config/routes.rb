@@ -32,6 +32,8 @@ Rails.application.routes.draw do
     # 下書き一覧画面
         get 'drafts'
       end
+        # コメント一覧画面
+        get 'comment_index'
     resource :favorites, only: [:create, :destroy]
     end
     # 退会確認画面

@@ -30,6 +30,15 @@
                         <%= f.submit '投稿する' %>
                 <% end %>
             <h4>Genre</h4>
+                <% @genre.each do |g| %>
+                    <ul>
+                        <li>
+                            <!--<= link_to post_path(post.id) do %>-->
+                                <%= g.name %>
+                            <!--< end %>-->
+                        </li>
+                    </ul>
+                <% end %>
         </div>
         <div class="col-7">
             <h3 class="d-flex justify-content-center">Post</h3>
@@ -53,7 +62,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><%= post.genre_id %></td>
+                                <td><%= post.genre.name %></td>
                             </tr>
                             <tr>
                                 <td><%= post.title %></td>

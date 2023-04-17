@@ -44,7 +44,7 @@
                 
         <div class="col-4">
             <h3>コメント</h3>
-                <% @post.comments.each do |comment| %>
+                <% @post.comments.first(2).each do |comment| %>
                     <div>
                         <h5><%= comment.member.nickname %></h5>
                         <p><%= comment.comment %></p>
@@ -53,7 +53,7 @@
                         <% end %>
                     </div>
                 <% end %>
-                <p><%= link_to "コメント件数：#{@post.comments.count}", post_path(@post.id) %></p>
+                <p><%= link_to "コメント件数：#{@post.comments.count}", post_comment_index_path(@post) %></p>
                 
                 <%= form_with model: [@post, @comment] do |f| %>
                     <%= f.label "コメントする" %><br>
@@ -78,7 +78,7 @@
                 </div>
         </div>
         <div class="col-2">
-            <h3>Pick up</h3>
+            <%= render 'public/members/right_bar', {posts: @posts, post_like_ranks: @post_like_ranks} %>
         </div>
     </div>
 </div>

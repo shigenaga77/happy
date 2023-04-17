@@ -2,6 +2,7 @@ class Public::PostsController < ApplicationController
   def index
     @post = Post.new
     @posts = Post.published.all.order(created_at: :desc)
+    @genre = Genre.all
   end
   
   def create
@@ -15,6 +16,9 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     @member = @post.member
     @comment = Comment.new
+    @posts = Post.published.all.order(created_at: :desc).limit(1)
+    # 投稿のいいね数ランキング
+    @post_like_ranks = Post.find(Favorite.group(:post_id).order('count(post_id) desc').limit(5).pluck(:post_id))
   end
 
   def edit
@@ -44,6 +48,12 @@ class Public::PostsController < ApplicationController
   
   def drafts
     @posts = current_member.posts.draft.all
+  end
+  
+  def comment_index
+    @post = Post.find(params[:post_id])
+    @member = @post.member
+    @comment = Comment.new
   end
   
   private
