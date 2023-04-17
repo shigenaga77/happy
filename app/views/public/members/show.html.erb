@@ -1,26 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-3 p-3">
-            <h4><%= @member.nickname %></h4>
-            <%= image_tag @member.get_profile_image(100,100) %>
-            <% if current_member != @member %>
-             　<% if current_member.following?(@member) %>
-               　<%= link_to 'フォロー外す', member_relationships_path(@member.id), method: :delete, class: "btn btn-danger btn-sm" %>
-               <% else %>
-               　<%= link_to 'フォローする', member_relationships_path(@member.id), method: :POST , class: "btn btn-primary btn-sm"%>
-               <% end %>
-            <% end %>
-            <h4 class="pt-3">自己紹介</h4>
-            <%= @member.self_introduction %>
-            <%= link_to "編集する", edit_member_path(current_member), class: 'btn btn-outline-primary mr-3' %>
-            <p class="pt-3">
-                <%= link_to "フォロー一覧", member_followers_path(@member) %><br>
-            </p>
-            <p>
-                <%= link_to "フォロワー一覧", member_followings_path(@member) %>
-            </p>
-            <h4 class="pt-3">いいね一覧</h4>
-            <p class="pt-3"><%=link_to"お気に入り記事",likes_member_path(@member) %></p>
+            <%= render 'left_bar', member: @member %>
         </div>
         
         <div class="col-7 p-3">
@@ -59,9 +40,7 @@
             </div>
         </div>
         <div class="col-2 p-3">
-            <h4>Pick up</h4>
-            <h4>Ranking</h4>
+            <%= render 'right_bar', {posts: @posts, post_like_ranks: @post_like_ranks} %>
         </div>
     </div>
 </div>
- 

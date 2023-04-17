@@ -1,7 +1,7 @@
 class Public::PostsController < ApplicationController
   def index
     @post = Post.new
-    @posts = Post.published.all
+    @posts = Post.published.all.order(created_at: :desc)
   end
   
   def create

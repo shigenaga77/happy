@@ -2,9 +2,10 @@ class Public::MembersController < ApplicationController
   
   def show
     @member = Member.find(params[:id])
-    @posts = Post.all
-    @my_posts = current_member.posts.page(params[:page]).per(5)
-    
+    @posts = Post.published.all.order(created_at: :desc).limit(1)
+    @my_posts = current_member.posts.page(params[:page]).order(created_at: :desc).per(5)
+    # 投稿のいいね数ランキング
+    @post_like_ranks = Post.find(Favorite.group(:post_id).order('count(post_id) desc').limit(5).pluck(:post_id))
   end
   
   def edit

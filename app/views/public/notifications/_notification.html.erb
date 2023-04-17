@@ -1,22 +1,45 @@
 <% visitor = notification.visitor %>
 <% visited = notification.visited %>
-
-<div class='m-2'>
-  <%= link_to member_path(visitor) do %>
-    <%= visitor.nickname %>
-  <% end %>
-  <span>さんが</span>
-
-  <% case notification.action %>
-    <% when 'follow' then %>
-      <%= "あなたをフォローしました" %>
-    <% when 'like' then %>
-        <%= link_to 'あなたの投稿', notification.post, style: "font-weight: bold;" %>
-        <%= "にいいねしました" %>
-    <% when 'comment' then %>
-        <%= link_to "あなたの投稿", notification.post, style: "font-weight: bold;" %>
-        <%= "にコメントしました" %>
-          <%= Comment.find_by(id: notification.comment_id)&.comment %>
-  <% end %>
-  <span><%= " (#{time_ago_in_words(notification.created_at)}前)" %></span><br>
+<div class="container">
+  <div class="row">
+    <div class="col-1">
+      <%= image_tag visitor.get_profile_image(50,50) %>
+    </div>
+    <div class='col-10 m-2'>
+    
+      <table>
+        <thead>
+          <tr>
+            <th>
+              <%= link_to member_path(visitor) do %>
+                <%= visitor.nickname %>
+              <% end %>
+              さんが
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <% case notification.action %>
+                <% when 'follow' then %>
+                  <%= "あなたをフォローしました" %>
+                <% when 'favorite' then %>
+                    <%= link_to 'あなたの投稿', notification.post, style: "font-weight: bold;" %>
+                    <%= "にいいねしました" %>
+                <% when 'comment' then %>
+                    <%= link_to "あなたの投稿", notification.post, style: "font-weight: bold;" %>
+                    <%= "にコメントしました" %>
+                      「<%= Comment.find_by(id: notification.comment_id)&.comment %>」
+                <% end %>
+            </td>
+            <td>
+              <!--<span><= " (#{time_ago_in_words(notification.created_at)}前)" %></span><br>-->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+  </div>
 </div>

@@ -19,9 +19,9 @@
       <% end %>
     </header>
     <nav>
-        <div class="d-flex justify-content-center">ようこそ、<%= current_member.nickname %>さん!</div>
       <ul class="nav d-flex justify-content-around p-3">
       <% if member_signed_in? %>
+        <div class="d-flex justify-content-center">ようこそ、<%= current_member.nickname %>さん!</div>
         <li>
           <%= link_to 'マイページ', member_path(current_member) %>
         </li>

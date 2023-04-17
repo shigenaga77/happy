@@ -1,0 +1,83 @@
+<h4>Pick up</h4>
+    <% posts.each do |post| %>
+    <table class="mr-5">
+            <thead>
+                <tr>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><%= post.created_at.strftime("%Y/%m/%d") %></td>
+                </tr>
+                <tr>
+                    <td>
+                        <%= link_to post_path(post.id) do %>
+                        <%= image_tag post.image, size: "100x100" %>
+                        <% end %>
+                    </td>
+                </tr>
+                <tr>
+                    <td><%= post.genre_id %></td>
+                </tr>
+                <tr>
+                    <td><%= post.title %></td>
+                </tr>
+                <tr>
+                    <td><%= post.body %></td>
+                </tr>
+                <tr>
+                    <td><%= link_to "#{post.comments.count} コメント", post_path(post.id) %></td>
+                </tr>
+            </tbody>
+        </table>
+    <% end %>
+    <h4>Ranking</h4>
+    <!--同率順位表示-->
+    <% last_like = 0 %>
+    <% j = 1 %>
+    <!--配列の1つ目から順に1位、２位と表示される-->
+    <% post_like_ranks.each.with_index(1) do |post, i| %>
+    <!--最初の値をlast_likeに保存-->
+      <% if i == 1 %>
+        <% last_like = post.favorites.count %>
+      <% end %>
+      <% if post.favorites.count != last_like %>
+        <% j = i %>
+        <strong>第<%= j %>位</strong>
+        <% last_like = post.favorites.count %>
+      <% else %>
+      <% last_like = post.favorites.count %>
+        <strong>第<%= j %>位</strong>
+      <% end %>
+    :
+    <!--表示したいカラムをご自由に-->
+    <table class="mr-5">
+                <thead>
+                    <tr>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <%= link_to post_path(post.id) do %>
+                            <%= image_tag post.image, size: "100x100" %>
+                            <% end %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><%= post.genre_id %></td>
+                    </tr>
+                    <tr>
+                        <td><%= post.title %></td>
+                    </tr>
+                    <tr>
+                        <td><%= post.body %></td>
+                    </tr>
+                    <tr>
+                        <td><%= link_to "#{post.comments.count} コメント", post_path(post.id) %></td>
+                    </tr>
+                </tbody>
+            </table>
+    <% end %>
