@@ -6,6 +6,7 @@ class Public::MembersController < ApplicationController
     @my_posts = current_member.posts.page(params[:page]).order(created_at: :desc).per(5)
     # 投稿のいいね数ランキング
     @post_like_ranks = Post.find(Favorite.group(:post_id).order('count(post_id) desc').limit(5).pluck(:post_id))
+    @main_background_image = "background-image3"
   end
   
   def edit

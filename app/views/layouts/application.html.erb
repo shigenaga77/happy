@@ -13,22 +13,24 @@
 
   <body class="<%= @background_image %>" >
     <header class="p-3">
-      <h1 class="d-flex justify-content-center"><%= link_to 'HAPPY', root_path %></h1>
+      <h1 class="d-flex justify-content-center"><%= link_to 'HAPPY', root_path, class: 'link' %></h1>
       <% if member_signed_in? %>
         <div class="d-flex justify-content-center">ようこそ、<%= current_member.nickname %>さん!</div>
-      <div class="d-flex justify-content-end">
-        <%= link_to "通知一覧", notifications_path %>
-      <% end %>
+      <div class="header_i fa-2x">
+        <%= link_to notifications_path, class: 'link' do %>
+          <i class="fas fa-bell"></i>
+        <% end %>
       </div>
+      <% end %>
     </header>
     <nav>
       <ul class="nav d-flex justify-content-around p-3">
       <% if member_signed_in? %>
         <li>
-          <%= link_to 'マイページ', member_path(current_member) %>
+          <%= link_to 'マイページ', member_path(current_member), class: 'link' %>
         </li>
         <li>
-          <%= link_to 'About', about_path %>
+          <%= link_to 'About', about_path, class: 'link' %>
         </li>
         <li>
           <%= form_with url: search_posts_path, local: true, method: :get do |form| %>
@@ -37,40 +39,42 @@
           <% end %>
         </li>
         <li>
-          <%= link_to '投稿一覧', posts_path %>
+          <%= link_to '投稿一覧', posts_path, class: 'link' %>
         </li>
         <li>
-          <%= link_to 'ログアウト', destroy_member_session_path, method: :delete %>
+          <%= link_to 'ログアウト', destroy_member_session_path, method: :delete, class: 'link' %>
         </li>
       <% elsif admin_signed_in? %>
         <li>
-          <%= link_to '投稿履歴一覧', admin_posts_path %>
+          <%= link_to '投稿履歴一覧', admin_posts_path, class: 'link' %>
         </li>
         <li>
-          <%= link_to '会員一覧', admin_members_path %>
+          <%= link_to '会員一覧', admin_members_path, class: 'link' %>
         </li>
         <li>
-          <%= link_to 'ジャンル', admin_genres_path %>
+          <%= link_to 'ジャンル', admin_genres_path, class: 'link' %>
         </li>
         <li>
-          <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %>
+          <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: 'link' %>
         </li>
       <% else %>
         <li>
-          <%= link_to "新規登録", new_member_registration_path %>
+          <%= link_to "新規登録", new_member_registration_path, class: 'link' %>
         </li>
         <li>
-          <%= link_to "ログイン", new_member_session_path %>
+          <%= link_to "ログイン", new_member_session_path, class: 'link' %>
         </li>
         <li>
-          <%= link_to "adminログイン", new_admin_session_path %>
+          <%= link_to "adminログイン", new_admin_session_path, class: 'link' %>
         </li>
         <li>
-          <%= link_to 'About', about_path %>
+          <%= link_to 'About', about_path, class: 'link' %>
         </li>
       <% end %>
       </ul>
     </nav>
-    <%= yield %>
+    <main class="<%= @main_background_image %>">
+      <%= yield %>
+    </main>
   </body>
 </html>

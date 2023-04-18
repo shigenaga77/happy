@@ -2,16 +2,34 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Bradley Hand','TsukuARdGothic-Regular',sans-serif;
 }
 
 header {
   background-color: #FFFFEE;
-  height: 20%;
+}
+
+.header_i {
+  position: absolute; /* headerの左上を基準に絶対位置で指定する */
+  top: 22px; /* headerの左上から22px下側へ移動する */
+  right: 22px; /* headerの右上から22px左側へ移動する */
+}
+
+nav {
+  background-color: #FFFFAA;
+}
+
+.link {
+  color: #000;
+}
+
+.link:hover {
+  color: #FFD5EC;
 }
 
 .background-image {
-  background: url(2.jpg);
-  height: 500px;
+  background: url(4.jpg);
+  height: 1000px;
   position: relative;     
   background-position: center;
   justify-content: center;
@@ -19,24 +37,55 @@ header {
   z-index: 1;
 }
 
-.background-image::before {
+.top_p {
+  padding-top: 250px;
+  padding-bottom: 50px;
+  margin-left: 300px;
+  text-align: center;
+}
+
+.background-image2 {
+  background: url(5.jpg);
+  height: 1000px;
+  position: relative;     
+  background-size: cover;
+  background-position: center;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.about_container {
+  max-width: 100% !important;
+}
+
+.about_text {
+  text-align: center;
+  padding-top: 300px;
+}
+
+.background-image3 {
+  background: url(6.jpg);
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.background-image3::before {
     background: inherit;
     content: '';
     position: absolute;
     filter: blur(5px);
-    top: -5px;
+    top: -0px;
     right: -5px;
-    bottom: -5px;
+    bottom: -0px;
     left: -5px;
     z-index: -1;
 }
 
-.background-image2 {
-  background: url(takebe.jpg);
-  height: 500px;
-  position: relative;     
-  background-position: center;
-  justify-content: center;
-  align-items: center;
-  z-index: 1;
+.main_color {
+  background-color: red;
 }

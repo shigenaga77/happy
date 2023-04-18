@@ -4,6 +4,6 @@ class Public::HomesController < ApplicationController
   end
   
   def about
-    @background_image = "background-image2"
+    @about_background_image = "background-image2"
   end
 end
