@@ -1,15 +1,33 @@
-  <h2>検索結果 "<%= @keyword %>"</h2>
-  <ul>
-    <% @post.each do |post| %>
-        <div>
-            <%= post.created_at.strftime("%Y/%m/%d") %>
-            <%= link_to post_path(post.id) do %>
-            <%= image_tag post.image, size: "100x100" %>
-            <% end %>
-            <%= post.genre_id %>
-            <%= post.title %>
-            <%= post.body %>
-        </div>
-    <% end %>
-  </ul>
-  
+<div class="container">
+  <div class="row d-flex justify-content-start">
+      <h2 class="p-3">検索結果 "<%= @keyword %>"</h2>
+  </div>
+  <div class="row d-flex justify-content-start">
+      <% @post.each do |post| %>
+        <div class="d-flex justify-content-between mb-3">
+                <div class="p-5">
+                    <p><%= post.created_at.strftime("%Y/%m/%d") %></p>
+                    <%= link_to post_path(post.id) do %>
+                    <%= image_tag post.image, size: "100x100" %>
+                    <% end %>
+                </div>
+                <div class="p-5">
+                    <table class="table table-borderless">
+                        <thead>
+                            <tr><th></th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><%= post.title %></td>
+                            </tr>
+                            <tr>
+                            <td><%= post.body %></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div></div>
+            </div>
+      <% end %>
+  </div>
+</div>

@@ -4,10 +4,39 @@
   box-sizing: border-box;
 }
 
-body {
-  background-size: cover;
+header {
+  background-color: #FFFFEE;
+  height: 20%;
+}
+
+.background-image {
+  background: url(2.jpg);
+  height: 500px;
+  position: relative;     
   background-position: center;
-  /*background-image: url("takebe.jpg");*/
-  background-color:rgba(255,255,255,0.8);
-  height: 100%;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.background-image::before {
+    background: inherit;
+    content: '';
+    position: absolute;
+    filter: blur(5px);
+    top: -5px;
+    right: -5px;
+    bottom: -5px;
+    left: -5px;
+    z-index: -1;
+}
+
+.background-image2 {
+  background: url(takebe.jpg);
+  height: 500px;
+  position: relative;     
+  background-position: center;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
 }

@@ -1,5 +1,5 @@
 <h4>Pick up</h4>
-    <% posts.each do |post| %>
+    <% pick_posts.each do |post| %>
     <table class="mr-5">
             <thead>
                 <tr>
@@ -18,7 +18,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><%= post.genre_id %></td>
+                    <td><%= post.genre.name %></td>
                 </tr>
                 <tr>
                     <td><%= post.title %></td>
@@ -67,7 +67,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><%= post.genre_id %></td>
+                        <td><%= post.genre.name %></td>
                     </tr>
                     <tr>
                         <td><%= post.title %></td>

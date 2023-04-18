@@ -2,7 +2,7 @@ class Public::MembersController < ApplicationController
   
   def show
     @member = Member.find(params[:id])
-    @posts = Post.published.all.order(created_at: :desc).limit(1)
+    @pick_posts = Post.published.all.order(created_at: :desc).limit(1)
     @my_posts = current_member.posts.page(params[:page]).order(created_at: :desc).per(5)
     # 投稿のいいね数ランキング
     @post_like_ranks = Post.find(Favorite.group(:post_id).order('count(post_id) desc').limit(5).pluck(:post_id))
@@ -36,6 +36,9 @@ class Public::MembersController < ApplicationController
     @member = Member.find(params[:id])
     favorites= Favorite.where(member_id: @member.id).pluck(:post_id)
     @favorite_posts = Post.find(favorites)
+    @pick_posts = Post.published.all.order(created_at: :desc).limit(1)
+    # 投稿のいいね数ランキング
+    @post_like_ranks = Post.find(Favorite.group(:post_id).order('count(post_id) desc').limit(5).pluck(:post_id))
   end
   
   

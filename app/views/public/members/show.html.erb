@@ -1,10 +1,10 @@
 <div class="container">
     <div class="row">
-        <div class="col-3 p-3">
+        <div class="col-3">
             <%= render 'left_bar', member: @member %>
         </div>
         
-        <div class="col-7 p-3">
+        <div class="col-7">
             <h4 class="d-flex justify-content-center">Post</h4>
             <% @my_posts.each do |post| %>
             <div class="d-flex justify-content-between mb-3">
@@ -13,7 +13,6 @@
                     <%= link_to post_path(post.id) do %>
                     <%= image_tag post.image, size: "100x100" %>
                     <% end %>
-                    <p class="pt-3"><%= post.genre_id %></p>
                 </div>
                 <div>
                     <table class="table table-borderless">
@@ -40,8 +39,10 @@
                 <%= paginate @my_posts %>
             </div>
         </div>
-        <div class="col-2 p-3">
-            <%= render 'right_bar', {posts: @posts, post_like_ranks: @post_like_ranks} %>
+        <div class="col-2">
+            <%= render 'right_bar', {pick_posts: @pick_posts, post_like_ranks: @post_like_ranks} %>
         </div>
     </div>
 </div>
+
+

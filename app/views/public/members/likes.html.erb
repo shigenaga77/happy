@@ -1,31 +1,43 @@
 <div class="container">
     <div class="row">
-        <%= render 'leftber', members: @member %>
-        <div class="col-2">
-            <h4 class="d-flex justify-content-center">いいね一覧</h4>
-            <% @favorite_posts.each do |post|%><br>
-                <%= post.member.nickname %><br>
-                <%= post.created_at.strftime("%Y/%m/%d") %><br>
-                <%= image_tag post.image, size: "100x100" %><br>
-                <%= post.genre_id %>
+        <div class="col-3">
+        <%= render 'left_bar', member: @member %>
         </div>
-        <div class="col-5 pt-5">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th><%= post.title %></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
+        <div class="col-7">
+            <h3 class="d-flex justify-content-center">いいね一覧</h3>
+            <% @favorite_posts.each do |post|%>
+            <div class="d-flex justify-content-between mb-3">
+                <div class="pr-5 pt-3">
+                    <p>
+                        <%= post.created_at.strftime("%Y/%m/%d") %><br>
+                        <%= post.member.nickname %>
+                    </p>
+                    <%= link_to post_path(post.id) do %>
+                    <%= image_tag post.image, size: "100x100" %>
+                    <% end %>
+                    <p class="pt-3"><%= post.genre.name %></p>
+                </div>
+                <div>
+                    <table class="table table-borderless">
+                        <thead>
+                            <tr><th></th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><%= post.title %></td>
+                            </tr>
+                            <tr>
                             <td><%= post.body %></td>
-                        </tr>
-                    </tbody>
-                </table>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div></div>
+            </div>
             <% end %>
         </div>
         <div class="col-2">
-            <h3>Pick up</h3>
+            <%= render 'right_bar', {pick_posts: @pick_posts, post_like_ranks: @post_like_ranks} %>
         </div>
     </div>
 </div>

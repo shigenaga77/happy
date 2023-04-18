@@ -11,17 +11,19 @@
     <title>Happy</title>
   </head>
 
-  <body>
-    <header class="d-flex justify-content-center p-3">
-      <h1><%= link_to 'HAPPY', root_path %></h1>
+  <body class="<%= @background_image %>" >
+    <header class="p-3">
+      <h1 class="d-flex justify-content-center"><%= link_to 'HAPPY', root_path %></h1>
       <% if member_signed_in? %>
+        <div class="d-flex justify-content-center">ようこそ、<%= current_member.nickname %>さん!</div>
+      <div class="d-flex justify-content-end">
         <%= link_to "通知一覧", notifications_path %>
       <% end %>
+      </div>
     </header>
     <nav>
       <ul class="nav d-flex justify-content-around p-3">
       <% if member_signed_in? %>
-        <div class="d-flex justify-content-center">ようこそ、<%= current_member.nickname %>さん!</div>
         <li>
           <%= link_to 'マイページ', member_path(current_member) %>
         </li>

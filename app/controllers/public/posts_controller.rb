@@ -3,6 +3,9 @@ class Public::PostsController < ApplicationController
     @post = Post.new
     @posts = Post.published.all.order(created_at: :desc)
     @genre = Genre.all
+    @pick_posts = Post.published.all.order(created_at: :desc).limit(1)
+    # 投稿のいいね数ランキング
+    @post_like_ranks = Post.find(Favorite.group(:post_id).order('count(post_id) desc').limit(5).pluck(:post_id))
   end
   
   def create
@@ -16,7 +19,7 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     @member = @post.member
     @comment = Comment.new
-    @posts = Post.published.all.order(created_at: :desc).limit(1)
+    @pick_posts = Post.published.all.order(created_at: :desc).limit(1)
     # 投稿のいいね数ランキング
     @post_like_ranks = Post.find(Favorite.group(:post_id).order('count(post_id) desc').limit(5).pluck(:post_id))
   end
