@@ -17,11 +17,13 @@ class Public::RelationshipsController < ApplicationController
 
   # フォローフォロワー一覧処理
   def followings
+    @main_background_image = "background-image3"
     member = Member.find(params[:member_id])
     @members = member.followings
   end
 
   def followers
+    @main_background_image = "background-image3"
     member = Member.find(params[:member_id])
     @members = member.followers
   end

@@ -1,25 +1,28 @@
 class Public::MembersController < ApplicationController
   
   def show
+    @main_background_image = "background-image3"
     @member = Member.find(params[:id])
     @pick_posts = Post.published.all.order(created_at: :desc).limit(1)
-    @my_posts = current_member.posts.page(params[:page]).order(created_at: :desc).per(5)
+    @my_posts = current_member.posts.page(params[:page]).order(created_at: :desc).per(3)
     # 投稿のいいね数ランキング
-    @post_like_ranks = Post.find(Favorite.group(:post_id).order('count(post_id) desc').limit(5).pluck(:post_id))
-    @main_background_image = "background-image3"
+    @post_like_ranks = Post.find(Favorite.group(:post_id).order('count(post_id) desc').limit(3).pluck(:post_id))
   end
   
   def edit
+    @main_background_image = "background-image3"
     @member = Member.find(params[:id])
   end
     
   def update
+    @main_background_image = "background-image3"
     @member = Member.find(params[:id])
     @member.update(member_params)
     redirect_to member_path
   end
   
   def comfirm
+    @main_background_image = "background-image3"
     @member = Member.find(params[:id])
   end
     
@@ -34,12 +37,13 @@ class Public::MembersController < ApplicationController
   
   
   def likes
+    @main_background_image = "background-image3"
     @member = Member.find(params[:id])
     favorites= Favorite.where(member_id: @member.id).pluck(:post_id)
     @favorite_posts = Post.find(favorites)
     @pick_posts = Post.published.all.order(created_at: :desc).limit(1)
     # 投稿のいいね数ランキング
-    @post_like_ranks = Post.find(Favorite.group(:post_id).order('count(post_id) desc').limit(5).pluck(:post_id))
+    @post_like_ranks = Post.find(Favorite.group(:post_id).order('count(post_id) desc').limit(3).pluck(:post_id))
   end
   
   

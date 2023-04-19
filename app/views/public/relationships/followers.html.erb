@@ -1,30 +1,34 @@
- <% if @members.count > 0 %>
-   <table class="table">
-   　<thead>
-     　<tr>
-       　<th>name</th>
-       </tr>
-     </thead>
-     <tbody>
-     　<% @members.each do |member| %>
-       　<tr>
-           <td><%= member.last_name %></td>
-           <td>フォロー数: <%= member.followings.count %></td>
-           <td>フォロワー数: <%= member.followers.count %></td>
-           <td>
-           　<% if current_member != member %>
-             　<% if current_member.following?(member) %>
-               　<%= link_to 'フォロー外す', member_relationships_path(member.id), method: :delete, class: "btn btn-default" %>
-               <% else %>
-               　<%= link_to 'フォローする', member_relationships_path(member.id), method: :POST , class: "btn btn-primary"%>
-               <% end %>
-            <% end %>
-          </td>
-          <td><%= link_to "ユーザー情報", member %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% else %>
-  <p>ユーザーはいません</p>
-<% end %>
+<div class="container main_color">
+    <div class="row">
+        <% if @members.count > 0 %>
+           <table class="table">
+           　<thead>
+             　<tr>
+               　<th>name</th>
+               </tr>
+             </thead>
+             <tbody>
+             　<% @members.each do |member| %>
+               　<tr>
+                   <td><%= member.last_name %></td>
+                   <td>フォロー数: <%= member.followings.count %></td>
+                   <td>フォロワー数: <%= member.followers.count %></td>
+                   <td>
+                   　<% if current_member != member %>
+                     　<% if current_member.following?(member) %>
+                       　<%= link_to 'フォロー外す', member_relationships_path(member.id), method: :delete, class: "btn btn-default" %>
+                       <% else %>
+                       　<%= link_to 'フォローする', member_relationships_path(member.id), method: :POST , class: "btn btn-primary"%>
+                       <% end %>
+                    <% end %>
+                  </td>
+                  <td><%= link_to "ユーザー情報", member %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% else %>
+          <p>ユーザーはいません</p>
+        <% end %>
+    </div>
+</div>

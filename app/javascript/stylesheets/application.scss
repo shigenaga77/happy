@@ -4,13 +4,16 @@
 .pagination>li>a {          
   border: none;     
   color: #696969;   
+  background-color: #FFEEFF;
 }
 
 .pagination>.active>a {     
   background: #93c9ff;     
   border-radius: 15px;     
+  background-color: #FFEEFF;
 }
 
 .pagination>li>a:hover {        
   border-radius: 15px;   
+  background-color: #FFEEFF;
 }

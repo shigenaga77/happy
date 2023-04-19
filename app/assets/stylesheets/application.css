@@ -27,11 +27,15 @@ nav {
   color: #FFD5EC;
 }
 
+main {
+  height: 1000px;
+}
+
 .background-image {
   background: url(4.jpg);
   height: 1000px;
   position: relative;     
-  background-position: center;
+  background-position: top;
   justify-content: center;
   align-items: center;
   z-index: 1;
@@ -87,5 +91,10 @@ nav {
 }
 
 .main_color {
-  background-color: red;
+  background-color: #FFEEFF;
+  height: 1000px;
+}
+
+h3 {
+  color: red;
 }

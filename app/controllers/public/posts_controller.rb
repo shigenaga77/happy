@@ -1,11 +1,12 @@
 class Public::PostsController < ApplicationController
   def index
+    @main_background_image = "background-image3"
     @post = Post.new
     @posts = Post.published.all.order(created_at: :desc)
     @genre = Genre.all
     @pick_posts = Post.published.all.order(created_at: :desc).limit(1)
     # 投稿のいいね数ランキング
-    @post_like_ranks = Post.find(Favorite.group(:post_id).order('count(post_id) desc').limit(5).pluck(:post_id))
+    @post_like_ranks = Post.find(Favorite.group(:post_id).order('count(post_id) desc').limit(3).pluck(:post_id))
   end
   
   def create
@@ -16,15 +17,17 @@ class Public::PostsController < ApplicationController
   end
 
   def show
+    @main_background_image = "background-image3"
     @post = Post.find(params[:id])
     @member = @post.member
     @comment = Comment.new
     @pick_posts = Post.published.all.order(created_at: :desc).limit(1)
     # 投稿のいいね数ランキング
-    @post_like_ranks = Post.find(Favorite.group(:post_id).order('count(post_id) desc').limit(5).pluck(:post_id))
+    @post_like_ranks = Post.find(Favorite.group(:post_id).order('count(post_id) desc').limit(3).pluck(:post_id))
   end
 
   def edit
+    @main_background_image = "background-image3"
     @post = Post.find(params[:id])
   end
   
@@ -41,6 +44,7 @@ class Public::PostsController < ApplicationController
   end
   
   def search
+    @main_background_image = "background-image3"
     if params[:keyword].present?
       @post = Post.where('title LIKE ?', "%#{params[:keyword]}%")
       @keyword = params[:keyword]
@@ -50,10 +54,12 @@ class Public::PostsController < ApplicationController
   end
   
   def drafts
+    @main_background_image = "background-image3"
     @posts = current_member.posts.draft.all
   end
   
   def comment_index
+    @main_background_image = "background-image3"
     @post = Post.find(params[:post_id])
     @member = @post.member
     @comment = Comment.new
