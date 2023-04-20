@@ -1,11 +1,11 @@
 <div class="container main_color">
     <div class="row">
         <div class="col-3">
-            <h4>New post</h4>
+            <h3>New post</h3>
                 <%= form_with model: @post do |f| %>
                     <%= f.label :画像 %>
                     <%= f.file_field :image, accept: "image/*" %>
-                    <table>
+                    <table class="table table-borderless">
                         <thead>
                             <tr>
                                 <th></th>
@@ -36,12 +36,12 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><%= f.submit '投稿する' %></td>
+                                <td><%= f.submit '投稿する', class: 'btn btn-success btn-sm' %></td>
                             </tr>
                         </tbody>
                     </table>
                 <% end %>
-            <h4>Genre</h4>
+            <h3>Genre</h3>
                 <% @genre.each do |g| %>
                     <ul>
                         <li>

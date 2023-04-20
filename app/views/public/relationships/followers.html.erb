@@ -1,4 +1,7 @@
 <div class="container main_color">
+    <div class="row d-flex justify-content-center">
+        <h3>フォロー一覧</h3>
+    </div>
     <div class="row">
         <% if @members.count > 0 %>
            <table class="table">
@@ -16,9 +19,9 @@
                    <td>
                    　<% if current_member != member %>
                      　<% if current_member.following?(member) %>
-                       　<%= link_to 'フォロー外す', member_relationships_path(member.id), method: :delete, class: "btn btn-default" %>
+                       　<%= link_to 'フォロー外す', member_relationships_path(member.id), method: :delete, class: 'btn btn-outline-danger' %>
                        <% else %>
-                       　<%= link_to 'フォローする', member_relationships_path(member.id), method: :POST , class: "btn btn-primary"%>
+                       　<%= link_to 'フォローする', member_relationships_path(member.id), method: :POST , class: 'btn btn-outline-primar'%>
                        <% end %>
                     <% end %>
                   </td>

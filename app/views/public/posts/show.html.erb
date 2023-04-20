@@ -1,14 +1,15 @@
 <div class="container main_color">
     <div class="row">
         <div class="col-2">
+            <h3>プロフィール</h3>
             <%= image_tag @member.get_profile_image(100,100) %><br>
             <%= link_to member_path(@member.id) do %>
             <p><%= @member.nickname %></p>
             <% end %>
             <p><%= @member.self_introduction %></p>
         </div>
-        <div class="col-3">
-            <h3 class="d-flex justify-content-start"><%= @post.title %></h3>
+        <div class="col-4">
+            <h3 class="d-flex justify-content-start">投稿</h3>
             <%= image_tag @post.image, size: "100x100" %>
             <table>
                 <thead>
@@ -17,6 +18,10 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr>
+                        <td>タイトル</td>
+                        <td><%= @post.title %></td>
+                    </tr>
                     <tr>
                         <td>投稿日時</td>
                         <td><%= @post.created_at.strftime("%Y/%m/%d") %></td>

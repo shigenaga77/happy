@@ -1,4 +1,4 @@
-<h4>Pick up</h4>
+<h3>Pick up</h3>
     <% pick_posts.each do |post| %>
     <table class="mr-5">
             <thead>
@@ -14,17 +14,11 @@
                     <td>
                         <%= link_to post_path(post.id) do %>
                         <%= image_tag post.image, size: "100x100" %>
-                        <% end %>
+                        <%end %>
                     </td>
                 </tr>
                 <tr>
-                    <td><%= post.genre.name %></td>
-                </tr>
-                <tr>
                     <td><%= post.title %></td>
-                </tr>
-                <tr>
-                    <td><%= post.body %></td>
                 </tr>
                 <tr>
                     <td><%= link_to "#{post.comments.count} コメント", post_path(post.id) %></td>
@@ -32,7 +26,7 @@
             </tbody>
         </table>
     <% end %>
-    <h4>Ranking</h4>
+    <h3>Ranking</h3>
     <!--同率順位表示-->
     <% last_like = 0 %>
     <% j = 1 %>
@@ -67,13 +61,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><%= post.genre.name %></td>
-                    </tr>
-                    <tr>
                         <td><%= post.title %></td>
-                    </tr>
-                    <tr>
-                        <td><%= post.body %></td>
                     </tr>
                     <tr>
                         <td><%= link_to "#{post.comments.count} コメント", post_path(post.id) %></td>
