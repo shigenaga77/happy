@@ -10,11 +10,11 @@
                 <div class="pr-5 pt-3">
                     <p>
                         <%= post.created_at.strftime("%Y/%m/%d") %><br>
-                        <%= post.member.nickname %>
-                    </p>
                     <%= link_to post_path(post.id) do %>
-                    <%= image_tag post.image, size: "100x100" %>
+                        <%= post.member.nickname %>
                     <% end %>
+                    </p>
+                    <%= image_tag post.image, size: "100x100" %>
                     <p class="pt-3"><%= post.genre.name %></p>
                 </div>
                 <div>

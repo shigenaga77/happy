@@ -26,11 +26,11 @@
                     </tr>
                     <tr>
                         <td>ジャンル</td>
-                        <td><%= f.text_field :genre_id %></td>
+                        <td><%= f.collection_select(:genre_id, Genre.all, :id, :name) %></td>
                     </tr>
                     <tr>
                         <td>投稿ステータス</td>
-                        <td><%= f.text_field :post_status %></td>
+                        <td><%= f.select :post_status, Post.post_statuses.keys.map { |k| [t("enums.post.post_status.#{k}"),k]}, {} %></td>
                     </tr>
                 </tbody>
             </table>

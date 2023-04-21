@@ -14,11 +14,23 @@
     <%= link_to "編集する", edit_member_path(current_member), class: 'btn btn-outline-success' %>
 </p>
 <p class="pt-3">
-    <%= link_to "フォロー一覧", member_followers_path(member) %>
+    <%= link_to member_followers_path(member) do %>
+        <i class="fas fa-user fa-lg"></i>フォロー一覧
+    <% end %>
 </p>
 <p>
-    <%= link_to "フォロワー一覧", member_followings_path(member) %>
+    <%= link_to member_followings_path(member) do %>
+        <i class="fas fa-user fa-lg"></i>フォロワー一覧
+    <% end %>
 </p>
-<p class="pt-3"><%=link_to"下書き",drafts_posts_path %></p>
+<p class="pt-3">
+    <%=link_to drafts_posts_path do %>
+        <i class="fas fa-book-open fa-lg"></i>下書き一覧
+    <% end %>
+</p>
 <h3 class="pt-3">いいね一覧</h3>
-<p class="pt-3"><%=link_to"お気に入り記事",likes_member_path(member) %></p>
+<p class="pt-3">
+    <%=link_to likes_member_path(member) do %>
+        <i class="fas fa-heart fa-lg"></i>お気に入り
+    <% end %>
+</p>
