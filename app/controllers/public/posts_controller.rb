@@ -12,8 +12,12 @@ class Public::PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.member_id = current_member.id
-    @post.save
-    redirect_to about_path
+    if @post.save
+      flash[:notice] = "You have created book successfully."
+      redirect_to posts_path
+   else
+      render :index
+   end
   end
 
   def show

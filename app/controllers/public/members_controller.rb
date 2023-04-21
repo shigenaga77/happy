@@ -1,10 +1,11 @@
 class Public::MembersController < ApplicationController
+  before_action :is_matching_login_member, only: [:edit, :update]
   
   def show
     @main_background_image = "background-image3"
     @member = Member.find(params[:id])
     @pick_posts = Post.published.all.order(created_at: :desc).limit(1)
-    @my_posts = current_member.posts.page(params[:page]).order(created_at: :desc).per(3)
+    @my_posts = @member.posts.page(params[:page]).order(created_at: :desc).per(3)
     # 投稿のいいね数ランキング
     @post_like_ranks = Post.find(Favorite.group(:post_id).order('count(post_id) desc').limit(3).pluck(:post_id))
   end
@@ -50,6 +51,13 @@ class Public::MembersController < ApplicationController
   private
   def member_params
     params.require(:member).permit(:profile_image, :email, :last_name, :first_name, :last_name_kana, :first_name_kana, :nickname, :self_introduction)
+  end
+  
+  def is_matching_login_member
+    member = Member.find(params[:id])
+    unless member.id == current_member.id
+      redirect_to posts_path
+    end
   end
   
 end

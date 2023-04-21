@@ -6,6 +6,11 @@ class Post < ApplicationRecord
     has_many :comments, dependent: :destroy
     has_many :notifications, dependent: :destroy
     
+    validates :title, presence: true
+    validates :body, presence: true
+    validates :genre_id, presence: true
+    validates :image, presence: true
+    
   def favorited_by?(member)
     favorites.exists?(member_id: member.id)
   end
