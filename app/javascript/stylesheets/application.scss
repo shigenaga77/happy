@@ -1,6 +1,10 @@
 @use '~bootstrap/scss/bootstrap';
 @use '~@fortawesome/fontawesome-free/scss/fontawesome';
 // ページネーションレイアウト
+.pagination {
+  margin-bottom: 0;  
+}
+
 .pagination>li>a {          
   border: none;     
   color: #696969;   

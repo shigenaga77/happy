@@ -11,7 +11,9 @@
 <h3 class="pt-3">自己紹介</h3>
 <%= member.self_introduction %>
 <p>
-    <%= link_to "編集する", edit_member_path(current_member), class: 'btn btn-outline-success' %>
+    <% if member == current_member %>
+        <%= link_to "編集する", edit_member_path(current_member), class: 'btn btn-outline-success' %>
+    <% end %>
 </p>
 <p class="pt-3">
     <%= link_to member_followers_path(member) do %>
@@ -24,13 +26,16 @@
     <% end %>
 </p>
 <p class="pt-3">
-    <%=link_to drafts_posts_path do %>
-        <i class="fas fa-book-open fa-lg"></i>下書き一覧
+    <% if member == current_member %>
+        <%=link_to drafts_posts_path do %>
+            <i class="fas fa-book-open fa-lg"></i>下書き一覧
+        <% end %>
     <% end %>
 </p>
-<h3 class="pt-3">いいね一覧</h3>
 <p class="pt-3">
-    <%=link_to likes_member_path(member) do %>
-        <i class="fas fa-heart fa-lg"></i>お気に入り
+    <% if member == current_member %>
+        <%=link_to likes_member_path(member) do %>
+            <i class="fas fa-heart fa-lg"></i>お気に入り一覧
+        <% end %>
     <% end %>
 </p>

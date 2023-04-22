@@ -2,7 +2,7 @@ class Public::PostsController < ApplicationController
   def index
     @main_background_image = "background-image3"
     @post = Post.new
-    @posts = Post.published.all.order(created_at: :desc)
+    @posts = Post.published.page(params[:page]).order(created_at: :desc)
     @genre = Genre.all
     @pick_posts = Post.published.all.order(created_at: :desc).limit(1)
     # 投稿のいいね数ランキング
@@ -13,11 +13,15 @@ class Public::PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.member_id = current_member.id
     if @post.save
-      flash[:notice] = "You have created book successfully."
+      flash[:notice] = "投稿が成功しました。"
       redirect_to posts_path
-   else
+    else
+      @posts = Post.published.page(params[:page]).order(created_at: :desc)
+      @pick_posts = Post.published.all.order(created_at: :desc).limit(1)
+      # 投稿のいいね数ランキング
+      @post_like_ranks = Post.find(Favorite.group(:post_id).order('count(post_id) desc').limit(3).pluck(:post_id))
       render :index
-   end
+    end
   end
 
   def show

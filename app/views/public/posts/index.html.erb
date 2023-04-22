@@ -1,16 +1,16 @@
 <div class="container main_color">
     <div class="row">
         <div class="col-3">
+            <p id="notice" class="not"><%= flash[:notice] %></p>
             <h3>New post</h3>
-            <!--<p id="notice"></p>-->
-            <!--< if @post.errors.any? %>-->
-            <!--  <= @post.errors.count %>件のエラーが発生しました-->
-            <!--  <ul>-->
-            <!--    < @post.errors.full_messages.each do |message| %>-->
-            <!--      <li><= message %></li>-->
-            <!--    < end %>-->
-            <!--  </ul>-->
-            <!--< end %>-->
+            <% if @post.errors.any? %>
+              <%= @post.errors.count %>件のエラーが発生しました
+              <ul>
+                <% @post.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            <% end %>
             
                 <%= form_with model: @post do |f| %>
                     <%= f.label :画像 %>
@@ -51,16 +51,14 @@
                         </tbody>
                     </table>
                 <% end %>
-            <h3>Genre</h3>
-                <% @genre.each do |g| %>
-                    <ul>
-                        <li>
-                            <!--<= link_to post_path(post.id) do %>-->
-                                <%= g.name %>
-                            <!--< end %>-->
-                        </li>
-                    </ul>
-                <% end %>
+            <!--<h3>Genre</h3>-->
+            <!--    < @genre.each do |g| %>-->
+            <!--        <ul>-->
+            <!--            <li>-->
+                                <!--<= g.name %>-->
+            <!--            </li>-->
+            <!--        </ul>-->
+            <!--    < end %>-->
         </div>
         <div class="col-7">
             <h3 class="d-flex justify-content-center">Post</h3>
@@ -101,6 +99,9 @@
                     </table>
                     <% end %>
                 </div>
+                <div class="row d-flex justify-content-center">
+                <%= paginate @posts %>
+            </div>
         </div>
         <div class="col-2">
             <%= render 'public/members/right_bar', {pick_posts: @pick_posts, post_like_ranks: @post_like_ranks} %>

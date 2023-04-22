@@ -1,5 +1,5 @@
 class Public::MembersController < ApplicationController
-  before_action :is_matching_login_member, only: [:edit, :update]
+  before_action :is_matching_login_member, only: [:edit, :update, :likes]
   
   def show
     @main_background_image = "background-image3"

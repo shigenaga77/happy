@@ -9,6 +9,7 @@ class Post < ApplicationRecord
     validates :title, presence: true
     validates :body, presence: true
     validates :genre_id, presence: true
+    validates :post_status, presence: true
     validates :image, presence: true
     
   def favorited_by?(member)
