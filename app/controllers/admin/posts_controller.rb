@@ -1,6 +1,6 @@
 class Admin::PostsController < ApplicationController
     def index
-        @posts = Post.page(params[:page]).per(10)
+        @posts = Post.page(params[:page]).order(created_at: :desc).per(10)
     end
     
     def show
@@ -15,6 +15,12 @@ class Admin::PostsController < ApplicationController
     def update
         @post = Post.find(params[:id])
         @post.update(post_params)
+        redirect_to admin_posts_path
+    end
+    
+    def destroy
+        @post = Post.find(params[:id])
+        @post.destroy
         redirect_to admin_posts_path
     end
     

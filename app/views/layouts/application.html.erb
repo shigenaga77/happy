@@ -13,14 +13,16 @@
 
   <body class="<%= @background_image %>" >
     <header class="p-3">
-      <h1 class="d-flex justify-content-center"><%= link_to 'HAPPY', root_path, class: 'link' %></h1>
       <% if member_signed_in? %>
+      <h1 class="d-flex justify-content-center"><%= link_to 'HAPPY', posts_path, class: 'link' %></h1>
         <div class="d-flex justify-content-center">ようこそ、<%= current_member.nickname %>さん!</div>
       <div class="header_i fa-2x">
         <%= link_to notifications_path, class: 'link' do %>
           <i class="fas fa-bell"></i>
-        <% end %>
+          <% end %>
       </div>
+      <% else %>
+      <h1 class="d-flex justify-content-center"><%= link_to 'HAPPY', root_path, class: 'link' %></h1>
       <% end %>
     </header>
     <nav>

@@ -28,7 +28,7 @@ class Public::MembersController < ApplicationController
   end
     
   def withdraw
-    @member = Member.find(params[:id])
+    @member = current_member
     # is_deletedカラムをtrueに変更することにより削除フラグを立てる
     @member.update(is_deleted: true)
     reset_session

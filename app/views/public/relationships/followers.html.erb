@@ -1,6 +1,6 @@
 <div class="container main_color">
     <div class="row d-flex justify-content-center">
-        <h3>フォロー一覧</h3>
+        <h3>フォロワー一覧</h3>
     </div>
     <div class="row">
         <% if @members.count > 0 %>
@@ -13,7 +13,11 @@
              <tbody>
              　<% @members.each do |member| %>
                　<tr>
-                   <td><%= member.last_name %></td>
+                   <td>
+                       <%= link_to member do %>
+                       <%= member.nickname %>
+                       <% end %>
+                   </td>
                    <td>フォロー数: <%= member.followings.count %></td>
                    <td>フォロワー数: <%= member.followers.count %></td>
                    <td>
@@ -25,7 +29,6 @@
                        <% end %>
                     <% end %>
                   </td>
-                  <td><%= link_to "ユーザー情報", member %></td>
                 </tr>
               <% end %>
             </tbody>

@@ -66,18 +66,20 @@
                     <%= f.submit "送信する", class: "btn btn-primary" %>
                 <% end %>
                 
-                <div>
+                <div class="pt-3">
                     <% if @post.favorited_by?(current_member) %>
                         <p>
                         <%= link_to post_favorites_path(@post), method: :delete do %>
-                        ♥<%= @post.favorites.count %> いいね
+                        <i class="fas fa-heart fa-2x like"></i><br>
                         <% end %>
+                        <%= @post.favorites.count %> いいね
                         </p>
                     <% else %>
                         <p>
                         <%= link_to post_favorites_path(@post), method: :post do %>
-                        ♡<%= @post.favorites.count %> いいね
+                        <i class="far fa-heart fa-2x like"></i><br>
                         <% end %>
+                        <%= @post.favorites.count %> いいね
                         </p>
                     <% end %>
                 </div>

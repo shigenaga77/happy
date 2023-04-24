@@ -38,15 +38,16 @@
     </div>
     <div class="row d-flex justify-content-center">
         <%= link_to "編集する", edit_admin_post_path, class: 'btn btn-outline-primary mr-5' %>
-        <%= link_to "削除する", admin_post_path, method: :delete, "data-confirm" => "本当に消しますか？", class: 'btn btn-sm btn-danger destry_book_id' %>
+        <%= link_to "削除する", admin_post_path, method: :delete, "data-confirm" => "本当に消しますか？", class: 'btn btn-outline-danger destry_book_id' %>
     </div>
     <div>
           <p>コメント件数：<%= @post.comments.count %></p>
           <% @post.comments.each do |comment| %>
+            <%= comment.created_at.strftime('%Y/%m/%d') %><br>
+            <%= comment.member.nickname %>
             <p><%= image_tag comment.member.get_profile_image(100,100) %></p>
-            <%= comment.member.last_name %>
-            <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
-            <%= link_to "削除", admin_post_comment_path(comment.post, comment), method: :delete %>
+            <%= comment.comment %>
+            <%= link_to "削除", admin_post_comment_path(comment.post, comment), method: :delete, class: 'btn btn-outline-danger destry_book_id' %>
           <% end %>
     </div>
 </div>

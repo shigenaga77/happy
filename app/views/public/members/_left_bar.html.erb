@@ -3,7 +3,7 @@
 <%= image_tag member.get_profile_image(100,100) %>
 <% if current_member != member %>
  　<% if current_member.following?(member) %>
-   　<%= link_to 'フォロー外す', member_relationships_path(member.id), method: :delete, class: "btn btn-danger btn-sm" %>
+   　<%= link_to 'フォローを外す', member_relationships_path(member.id), method: :delete, class: "btn btn-danger btn-sm" %>
    <% else %>
    　<%= link_to 'フォローする', member_relationships_path(member.id), method: :POST , class: "btn btn-primary btn-sm"%>
    <% end %>
@@ -17,12 +17,12 @@
 </p>
 <p class="pt-3">
     <%= link_to member_followers_path(member) do %>
-        <i class="fas fa-user fa-lg"></i>フォロー一覧
+        <i class="fas fa-user fa-lg"></i>フォロワー一覧
     <% end %>
 </p>
 <p>
     <%= link_to member_followings_path(member) do %>
-        <i class="fas fa-user fa-lg"></i>フォロワー一覧
+        <i class="fas fa-user fa-lg"></i>フォロー一覧
     <% end %>
 </p>
 <p class="pt-3">

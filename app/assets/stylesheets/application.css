@@ -17,6 +17,8 @@ header {
 
 nav {
   background-color: #FFFFAA;
+  border-bottom: 0.5px solid #000;
+  border-top: 0.5px solid #000;
 }
 
 .link {
@@ -42,9 +44,9 @@ main {
 }
 
 .top_p {
-  padding-top: 250px;
+  padding-top: 270px;
   padding-bottom: 50px;
-  margin-left: 300px;
+  margin-left: 320px;
   text-align: center;
 }
 
@@ -109,4 +111,29 @@ h3 {
 
 .not {
   color: blue;
+}
+
+.botton_link {
+  color: yellow	;
+}
+
+.botton_link:hover {
+  color: yellow;
+}
+
+.registrations {
+  color: blue;
+}
+
+.like {
+  color: red;
+}
+
+.like:hover {
+  color: red;
+}
+
+.comment {
+  border-bottom: 0.5px solid #000;
+  margin-bottom: 20px;
 }

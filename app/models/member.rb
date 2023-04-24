@@ -23,6 +23,12 @@ class Member < ApplicationRecord
   has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
   has_one_attached :profile_image
   
+  validates :last_name, presence: true
+  validates :first_name, presence: true
+  validates :last_name_kana, presence: true
+  validates :last_name_kana, presence: true
+  validates :nickname, presence: true
+
   def active_for_authentication?
     super && (is_deleted == false)
   end
