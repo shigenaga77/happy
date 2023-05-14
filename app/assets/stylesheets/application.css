@@ -34,7 +34,7 @@ main {
 }
 
 .background-image {
-  background: url(4.jpg);
+  background-image: image-url("4.jpg");
   height: 1000px;
   position: relative;     
   background-position: top;
@@ -51,7 +51,7 @@ main {
 }
 
 .background-image2 {
-  background: url(5.jpg);
+  background-image: image-url("5.jpg");
   height: 1000px;
   position: relative;     
   background-size: cover;
@@ -71,7 +71,7 @@ main {
 }
 
 .background-image3 {
-  background: url(6.jpg);
+  background-image: image-url("6.jpg");
   position: relative;
   background-size: cover;
   background-position: center;
