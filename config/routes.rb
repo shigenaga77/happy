@@ -40,7 +40,6 @@ Rails.application.routes.draw do
     # 論理削除用のルーティング
     # 通知機能
     resources :notifications, only: :index
-    get 'favicon.ico'
   end
   
   namespace :admin do
