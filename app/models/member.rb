@@ -39,11 +39,11 @@ class Member < ApplicationRecord
       member.password = SecureRandom.urlsafe_base64
       # user.confirmed_at = Time.now  # Confirmable を使用している場合は必要
       # 例えば name を入力必須としているならば， member.name = "ゲスト" なども必要
-      member.last_name = ""
+      member.last_name = "guest"
       member.first_name = "guest"
-      member.last_name_kana = ""
-      member.first_name_kana = ""
-      member.nickname = ""
+      member.last_name_kana = "guest"
+      member.first_name_kana = "guest"
+      member.nickname = "guest"
     end
   end
   
