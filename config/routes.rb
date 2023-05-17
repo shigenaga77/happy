@@ -47,7 +47,7 @@ Rails.application.routes.draw do
     resources :posts, only: [:index, :show, :edit, :update, :destroy]do
       resources :comments, only: :destroy
     end
-    resources :genres, only: [:index, :edit, :update, :create]
+    resources :genres, only: [:index, :edit, :update, :create, :destroy]
   end
   
   # 管理者用
