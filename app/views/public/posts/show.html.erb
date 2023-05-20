@@ -8,9 +8,9 @@
             <% end %>
             <p><%= @member.self_introduction %></p>
         </div>
-        <div class="col-4">
-            <h3 class="d-flex justify-content-start">投稿</h3>
-            <%= image_tag @post.image, size: "100x100" %>
+        <div class="col-7 ml-3">
+            <h3 class="d-flex justify-content-center">投稿</h3>
+            <%= image_tag @post.image, size: "200x200" %>
             <table class="table table-borderless">
                 <thead>
                     <tr>
@@ -45,43 +45,46 @@
                 <%= link_to "編集する", edit_post_path, class: 'btn btn-outline-primary mr-3' %>
                 <%= link_to "削除する", post_path, method: :delete, "data-confirm" => "本当に消しますか？", class: 'btn btn-outline-danger destry_book_id' %>
             <% end %>
-        </div>
-                
-                
-        <div class="col-4">
+            
             <h3>コメント</h3>
-                <% @post.comments.first(2).each do |comment| %>
-                    <div>
-                        <h5><%= comment.member.nickname %></h5>
-                        <p><%= comment.comment %></p>
-                        <% if comment.member == current_member %>
-                            <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete, class: 'btn btn-danger btn-sm' %>
+                <div class="row">
+                    <% @post.comments.first(1).each do |comment| %>
+                        <div class="col-2"><%= image_tag comment.member.get_profile_image(80,80) %></div>
+                        <div class="col-10">
+                            <h5><%= comment.member.nickname %></h5>
+                            <p><%= comment.comment %></p>
+                            <% if comment.member == current_member %>
+                                <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete, class: 'btn btn-danger btn-sm' %>
+                            <% end %>
+                        </div>
+                    <% end %>
+                    <p><%= link_to "コメント件数：#{@post.comments.count}", post_comment_index_path(@post) %></p>
+                </div>
+                
+                <div class="row">
+                    <div class="col-4">
+                        <%= form_with model: [@post, @comment] do |f| %>
+                            <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %><br>
+                            <%= f.submit "送信する", class: "btn btn-primary" %>
                         <% end %>
                     </div>
-                <% end %>
-                <p><%= link_to "コメント件数：#{@post.comments.count}", post_comment_index_path(@post) %></p>
-                
-                <%= form_with model: [@post, @comment] do |f| %>
-                    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %><br>
-                    <%= f.submit "送信する", class: "btn btn-primary" %>
-                <% end %>
-                
-                <div class="pt-3">
-                    <% if @post.favorited_by?(current_member) %>
-                        <p>
-                        <%= link_to post_favorites_path(@post), method: :delete do %>
-                        <i class="fas fa-heart fa-2x like"></i><br>
+                    <div class="col-4 pt-3">
+                        <% if @post.favorited_by?(current_member) %>
+                            <p>
+                            <%= link_to post_favorites_path(@post), method: :delete do %>
+                            <i class="fas fa-heart fa-2x like"></i><br>
+                            <% end %>
+                            <%= @post.favorites.count %> いいね
+                            </p>
+                        <% else %>
+                            <p>
+                            <%= link_to post_favorites_path(@post), method: :post do %>
+                            <i class="far fa-heart fa-2x like"></i><br>
+                            <% end %>
+                            <%= @post.favorites.count %> いいね
+                            </p>
                         <% end %>
-                        <%= @post.favorites.count %> いいね
-                        </p>
-                    <% else %>
-                        <p>
-                        <%= link_to post_favorites_path(@post), method: :post do %>
-                        <i class="far fa-heart fa-2x like"></i><br>
-                        <% end %>
-                        <%= @post.favorites.count %> いいね
-                        </p>
-                    <% end %>
+                    </div>
                 </div>
         </div>
         <div class="col-2">
