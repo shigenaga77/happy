@@ -22,7 +22,7 @@
                         <td><%= f.text_field :body %></td>
                     </tr>
                     <tr>
-                        <td>ジャンル</td>
+                        <td class="genre">ジャンル</td>
                         <td><%= f.collection_select(:genre_id, Genre.all, :id, :name) %></td>
                     </tr>
                     <tr>
