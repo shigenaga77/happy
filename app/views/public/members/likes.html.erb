@@ -41,6 +41,9 @@
                 <div></div>
             </div>
             <% end %>
+            <div class="row d-flex justify-content-center">
+                <%= paginate @favorite_posts %>
+            </div>
         </div>
         <div class="col-2">
             <%= render 'right_bar', {pick_posts: @pick_posts, post_like_ranks: @post_like_ranks} %>

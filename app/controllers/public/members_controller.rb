@@ -36,17 +36,15 @@ class Public::MembersController < ApplicationController
     redirect_to root_path
   end
   
-  
   def likes
     @main_background_image = "background-image3"
     @member = Member.find(params[:id])
     favorites= Favorite.where(member_id: @member.id).pluck(:post_id)
-    @favorite_posts = Post.find(favorites)
+    @favorite_posts = Post.where(id: favorites).page(params[:page]).order(created_at: :desc)
     @pick_posts = Post.published.all.order(created_at: :desc).limit(1)
     # 投稿のいいね数ランキング
     @post_like_ranks = Post.find(Favorite.group(:post_id).order('count(post_id) desc').limit(3).pluck(:post_id))
   end
-  
   
   private
   def member_params
