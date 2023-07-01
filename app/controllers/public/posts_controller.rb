@@ -8,7 +8,7 @@ class Public::PostsController < ApplicationController
     # 投稿のいいね数ランキング
     @post_like_ranks = Post.find(Favorite.group(:post_id).order('count(post_id) desc').limit(3).pluck(:post_id))
   end
-  
+
   def create
     @post = Post.new(post_params)
     @post.member_id = current_member.id
@@ -38,19 +38,19 @@ class Public::PostsController < ApplicationController
     @main_background_image = "background-image3"
     @post = Post.find(params[:id])
   end
-  
+
   def update
     @post = Post.find(params[:id])
     @post.update(post_params)
-    redirect_to post_path(post.id)
+    redirect_to post_path(@post.id)
   end
-  
+
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
     redirect_to posts_path
   end
-  
+
   def search
     @main_background_image = "background-image3"
     if params[:keyword].present?
@@ -60,23 +60,23 @@ class Public::PostsController < ApplicationController
       @post = Post.all
     end
   end
-  
+
   def drafts
     @main_background_image = "background-image3"
     @posts = current_member.posts.draft.all
   end
-  
+
   def comment_index
     @main_background_image = "background-image3"
     @post = Post.find(params[:post_id])
     @member = @post.member
     @comment = Comment.new
   end
-  
+
   private
-  
+
   def post_params
     params.require(:post).permit(:title, :body, :image, :genre_id, :post_status)
   end
-  
+
 end
