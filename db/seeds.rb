@@ -15,48 +15,37 @@ members = Member.create!(
    [
       {
          email: 'tanaka@tarou.com',
-         password: 'tanakatarou', 
-         last_name: '太郎', 
-         first_name: '田中', 
-         last_name_kana: 'タロウ', 
-         first_name_kana: 'タナカ', 
-         nickname: 'たろうくん', 
+         password: 'tanakatarou',
+         last_name: '太郎',
+         first_name: '田中',
+         last_name_kana: 'タロウ',
+         first_name_kana: 'タナカ',
+         nickname: 'たろうくん',
          self_introduction: 'こんにちは。田中太郎です。'
-         
+
       },
       {
-         email: 'satou@hikaru.com', 
-         password: 'satouhikaru', 
-         last_name: '光', 
-         first_name: '佐藤', 
-         last_name_kana: 'ヒカル', 
-         first_name_kana: 'サトウ', 
-         nickname: 'ひかるくん', 
+         email: 'satou@hikaru.com',
+         password: 'satouhikaru',
+         last_name: '光',
+         first_name: '佐藤',
+         last_name_kana: 'ヒカル',
+         first_name_kana: 'サトウ',
+         nickname: 'ひかるくん',
          self_introduction: 'こんにちは。佐藤光です。'
-         
+
       },
       {
-         email: 'nakamura@kaito.com', 
-         password: 'nakamurakaito', 
-         last_name: '海斗', 
-         first_name: '中村', 
-         last_name_kana: 'カイト', 
-         first_name_kana: 'ナカムラ', 
-         nickname: 'かいとくん', 
-         self_introduction: 'こんにちは。中村海斗です。'
-         
-      },
-      {
-         email: 'mimura@yui.com', 
-         password: 'mimurayui', 
-         last_name: '由衣', 
-         first_name: '三村', 
-         last_name_kana: 'ユイ', 
-         first_name_kana: 'ミムラ', 
-         nickname: 'ゆいちゃん', 
+         email: 'mimura@yui.com',
+         password: 'mimurayui',
+         last_name: '由衣',
+         first_name: '三村',
+         last_name_kana: 'ユイ',
+         first_name_kana: 'ミムラ',
+         nickname: 'ゆいちゃん',
          self_introduction: 'こんにちは。三村由衣です。'
-         
-      }   
+
+      }
    ]
 )
 
@@ -70,7 +59,7 @@ genres = Genre.create!(
 
 Post.create!(
   [
-    { 
+    {
       title: 'ピクニック',
       body: '今日は〇〇公園までピクニックに行ってきた！',
       image: ActiveStorage::Blob.create_and_upload!(
@@ -78,7 +67,7 @@ Post.create!(
         filename: "5.jpg"
       ),
       member_id: members[0].id,
-      genre_id: genres[0].id 
+      genre_id: genres[0].id
     },
     {
       title: '節約',
@@ -88,7 +77,7 @@ Post.create!(
         filename: "6.jpg"
       ),
       member_id: members[1].id,
-      genre_id: genres[1].id 
+      genre_id: genres[1].id
     },
     {
       title: '初めての日',
@@ -98,7 +87,7 @@ Post.create!(
         filename: "4.jpg"
       ),
       member_id: members[2].id,
-      genre_id: genres[2].id 
+      genre_id: genres[2].id
     }
   ]
 )
