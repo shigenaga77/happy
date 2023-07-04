@@ -3,11 +3,12 @@
     <div class="row">
         <div>
             <% @post.comments.each do |comment| %>
-                <div class="comment">
+                <div class="mb-2">
                     <h5><%= comment.member.nickname %></h5>
+                    <p><%= comment.created_at.strftime("%Y/%m/%d %H:%M") %></p>
                     <p><%= comment.comment %></p>
                     <% if comment.member == current_member %>
-                        <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete %>
+                        <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete, class: 'btn btn-danger btn-sm' %>
                     <% end %>
                 </div>
             <% end %>

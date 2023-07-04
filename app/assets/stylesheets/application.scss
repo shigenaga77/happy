@@ -36,7 +36,7 @@ main {
 .background-image {
   background-image: image-url("4.jpg");
   height: 1000px;
-  position: relative;     
+  position: relative;
   background-position: top;
   justify-content: center;
   align-items: center;
@@ -54,7 +54,7 @@ main {
 .background-image2 {
   background-image: image-url("5.jpg");
   height: 1000px;
-  position: relative;     
+  position: relative;
   background-size: cover;
   background-position: center;
   justify-content: center;
@@ -141,4 +141,22 @@ h3 {
 
 .genre {
   color: green;
+}
+
+.index-post-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.show-post-img{
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+}
+
+.draft-post-img{
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
 }

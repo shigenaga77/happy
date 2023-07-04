@@ -13,13 +13,15 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        <%= post.created_at.strftime("%Y/%m/%d") %><br>
-                                        <%= image_tag post.image, size: "70x70" %>
+                                        <%= link_to post_path(post.id) do %>
+                                            <%= post.created_at.strftime("%Y/%m/%d") %><br>
+                                            <%= image_tag post.image, class: "draft-post-image" %>
+                                        <% end %>
                                     </td>
                                     <td>
                                         <%= post.title %><br>
                                         <%= post.body %>
-                                        <%= link_to "編集", edit_post_path(post.id) %>
+                                        <%= link_to "", edit_post_path(post.id) %>
                                     </td>
                                 </tr>
                             </tbody>
@@ -27,7 +29,6 @@
                 <% end %>
         </div>
         <div class="col-2">
-            <h3>Pick up</h3>
         </div>
     </div>
 </div>

@@ -1,4 +1,5 @@
 class Public::PostsController < ApplicationController
+  before_action :is_matching_login_member, only: [:edit, :update]
   def index
     @main_background_image = "background-image3"
     @post = Post.new
@@ -41,8 +42,11 @@ class Public::PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    @post.update(post_params)
-    redirect_to post_path(@post.id)
+    if @post.update(post_params)
+      redirect_to post_path(@post.id)
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -54,7 +58,7 @@ class Public::PostsController < ApplicationController
   def search
     @main_background_image = "background-image3"
     if params[:keyword].present?
-      @post = Post.where('title LIKE ?', "%#{params[:keyword]}%")
+      @post = Post.published.where('title LIKE ?', "%#{params[:keyword]}%")
       @keyword = params[:keyword]
     else
       @post = Post.all
@@ -77,6 +81,12 @@ class Public::PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:title, :body, :image, :genre_id, :post_status)
+  end
+
+  def is_matching_login_member
+    @posts = current_member.posts
+    @post = @posts.find_by(id: params[:id])
+    redirect_to posts_path unless @post
   end
 
 end

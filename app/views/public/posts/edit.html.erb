@@ -1,6 +1,16 @@
 <div class="container main_color">
     <div class="row d-flex justify-content-center">
-        <h3>投稿編集</h3>
+        <div>
+            <% if @post.errors.any? %>
+              <%= @post.errors.count %>件のエラーが発生しました
+              <ul>
+                <% @post.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            <% end %>
+        </div>
+        <h3 class="">投稿編集</h3>
             <%= form_with model: @post, url: post_path, method: :patch do |f| %>
             <table class="table table-borderless">
                 <thead>

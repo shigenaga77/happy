@@ -4,11 +4,11 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    
+
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    
+
     <title>Happy</title>
   </head>
 
@@ -20,7 +20,7 @@
       <div class="header_i fa-2x">
         <%= link_to notifications_path, class: 'link' do %>
           <i class="fas fa-bell"></i>
-          <% end %>
+        <% end %>
       </div>
       <% elsif admin_signed_in? %>
       <h1 class="d-flex justify-content-center"><%= link_to 'HAPPY', admin_posts_path, class: 'link' %></h1>
