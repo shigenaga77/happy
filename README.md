@@ -31,6 +31,12 @@
 https://docs.google.com/spreadsheets/d/1ycOK7pZJ6--5WOjgOkr4MYEIUnRomlKanqFRaXlnxGs/edit?usp=sharing
 
 ## 設計書
+### 詳細設計書
+https://docs.google.com/spreadsheets/d/1D8ziNjjvrnjGlzJ0hCNm73sQq8IOo_YWxOyOKNaf27U/edit?usp=sharing
+### ER図
+https://drive.google.com/file/d/1QMAkH7MDj9Yd60svILHrOavoFK_fwp3w/view?usp=sharing
+### テーブル定義書
+https://docs.google.com/spreadsheets/d/16SHHf7V4_zsi9E1YSS9D3b7CUR-JhjWwFFArRYXviMk/edit?usp=sharing
 
 
 

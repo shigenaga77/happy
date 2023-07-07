@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     post 'members/guest_sign_in', to: 'public/sessions#guest_sign_in'
   end
   # 会員側
-  scope module: :public do 
+  scope module: :public do
     root to: "homes#top"
     get '/about' => 'homes#about', as: 'about'
     get '/members/confirm' => 'members#confirm', as: 'confirm'
@@ -24,8 +24,7 @@ Rails.application.routes.draw do
       get 'followings' => 'relationships#followings', as: 'followings'
       get 'followers' => 'relationships#followers', as: 'followers'
     end
-    resources :posts do
-      resources :posts, only: [:index, :show, :edit, :update, :create, :destroy]
+    resources :posts, only: [:index, :show, :edit, :update, :create, :destroy] do
       resources :comments, only: [:create, :destroy]
       collection do
         get 'search'
@@ -41,7 +40,7 @@ Rails.application.routes.draw do
     # 通知機能
     resources :notifications, only: :index
   end
-  
+
   namespace :admin do
     resources :members, only: [:index, :show, :edit, :update]
     resources :posts, only: [:index, :show, :edit, :update, :destroy]do
@@ -49,7 +48,7 @@ Rails.application.routes.draw do
     end
     resources :genres, only: [:index, :edit, :update, :create, :destroy]
   end
-  
+
   # 管理者用
   # URL /admin/sign_in ...
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
