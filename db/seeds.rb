@@ -8,7 +8,7 @@
 
 Admin.create!(
    email: 'admin@admin',
-   password: 'adminadmin'
+   password: 'admin1234'
 )
 
 members = Member.create!(
