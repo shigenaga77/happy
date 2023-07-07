@@ -1,5 +1,7 @@
 <h3>ニックネーム</h3>
-<%= member.nickname %><br>
+<!--is_deletedがfalseなので退会していないことになる-->
+<% if member.is_deleted == false %>
+    <%= member.nickname %><br>
 <%= image_tag member.get_profile_image(100,100) %>
 <% if current_member != member %>
  　<% if current_member.following?(member) %>
@@ -39,3 +41,7 @@
         <% end %>
     <% end %>
 </p>
+    <!--elseでis_deleted == trueの場合、つまり退会した場合の表示にする-->
+<% else %>
+     退会済みユーザー
+<% end %>

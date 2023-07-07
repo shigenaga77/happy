@@ -11,7 +11,7 @@
                 <% end %>
               </ul>
             <% end %>
-            
+
                 <%= form_with model: @post do |f| %>
                     <%= f.label :画像 %>
                     <%= f.file_field :image, accept: "image/*" %>

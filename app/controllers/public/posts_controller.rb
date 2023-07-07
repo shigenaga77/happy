@@ -58,7 +58,7 @@ class Public::PostsController < ApplicationController
   def search
     @main_background_image = "background-image3"
     if params[:keyword].present?
-      @post = Post.published.where('title LIKE ?', "%#{params[:keyword]}%")
+      @post = Post.published.where('title LIKE ? OR body LIKE ? OR genre_id LIKE ?', "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
       @keyword = params[:keyword]
     else
       @post = Post.all
